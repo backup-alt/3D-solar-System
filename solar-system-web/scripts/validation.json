@@ -98,29 +98,22 @@
   "neptune.glb": {
     "imported": true,
     "objects": [
-      "Clouds",
-      "NEPTUNE_ROOT",
-      "Uranus"
+      "Neptune",
+      "NEPTUNE_ROOT"
     ],
-    "meshes": 2,
-    "triangles": 15360,
+    "meshes": 1,
+    "triangles": 36480,
     "materials": [
-      "WEB_neptune_cloud",
       "WEB_neptune_surface"
     ],
     "images": [
       {
-        "name": "04_Uranus Textur",
+        "name": "00_neptune_baked",
         "width": 2048,
         "height": 1024
-      },
-      {
-        "name": "05_clouds",
-        "width": 1024,
-        "height": 512
       }
     ],
-    "bytes": 1023708
+    "bytes": 947940
   },
   "saturn.glb": {
     "imported": true,

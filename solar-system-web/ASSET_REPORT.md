@@ -14,9 +14,9 @@ Generated from read-only inspection of the nine original Blender files with Blen
 | jupiter | 23,680 | 15,872 | 15,872 | Jupitermap_edited(3).jpg (3601×1801) | 0.66 MiB | Jupiter |
 | saturn | 16,960 | 1,088 | 4,096 | saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg (4096×2048)<br>Saturn rings.jpg (1035×582) | 0.30 MiB | Sphere, Circle |
 | uranus | 17,088 | 1,216 | 4,224 | uranusmap.jpg (1024×512)<br>uranusringcolour.jpg.001 (1024×72) | 0.12 MiB | Neptune, Circle |
-| neptune | 30,720 | 15,360 | 15,360 | Uranus Textur.jpg (2048×1024)<br>clouds.jpg (2048×1024) | 0.98 MiB | Uranus, Clouds |
+| neptune | 103,680 | 36,480 | 36,480 | procedural → baked | 0.90 MiB | Neptune |
 
-All nine GLBs were imported into a clean Blender scene after export. Total transfer size is 11.08 MiB; progressive loading is required for the website. A GLB is self-contained, including the optimized textures. Surface images are limited to 1–4K; cloud and ring masks are 1–2K.
+All nine GLBs were imported into a clean Blender scene after export. Total transfer size is 11.01 MiB; progressive loading is required for the website. A GLB is self-contained, including the optimized textures. Surface images are limited to 1–4K; cloud and ring masks are 1–2K.
 
 ## Inspection details
 
@@ -94,18 +94,18 @@ The complete per-object, per-material and per-image inventories are in `scripts/
 - **Modifiers / animation:** Neptune: SUBSURF; animated source objects: none on retained objects; actions: Jupiter 2Action.
 - **Web result:** 2 meshes, 4,224 triangles, 2 embedded textures (1024×512, 1024×72), 0.12 MiB. Object named Neptune is actually the Uranus surface, based on its Uranus material and texture. Circle is its ring. Ring texture luminance becomes alpha; unrelated Jupiter mesh is excluded.
 
-### Neptune — Neuptun Neu.blend
+### Neptune — Neptune_Improved_02.blend
 
-- **Kept:** Clouds (7,680 tris, 0 UV maps); Uranus (7,680 tris, 0 UV maps).
-- **Excluded:** Camera (camera), Camera.001 (camera), Clouds.001 (mesh), Clouds.002 (mesh), Sun (light), Sun.001 (light). Scene totals: 2 cameras, 2 lights, 0 empties.
-- **Source materials:** clouds [ShaderNodeMixShader, ShaderNodeTexImage, ShaderNodeTexImage, ShaderNodeBsdfDiffuse, ShaderNodeBsdfTransparent, ShaderNodeDisplacement; DITHERED; alpha 1]; Uranus [ShaderNodeBsdfDiffuse, ShaderNodeTexImage, ShaderNodeTexImage, ShaderNodeDisplacement; DITHERED; alpha 1].
+- **Kept:** Neptune (36,480 tris, 1 UV maps).
+- **Excluded:** Camera (camera), Camera.001 (camera), Clouds (mesh), Clouds.001 (mesh), Clouds.002 (mesh), Neptune portrait (camera), Neptune portrait.001 (camera), Neptune • atmospheric haze (mesh), Sun (light), Sun • directional illumination (light), Sun • directional illumination.001 (light), Sun.001 (light), Uranus (mesh). Scene totals: 4 cameras, 4 lights, 0 empties.
+- **Source materials:** Neptune • subtle blue-green cloud tops.001 [ShaderNodeBsdfPrincipled; DITHERED; alpha 1].
 - **Source images:** clouds.jpg 2048×1024 packed; Uranus Textur.jpg 2048×1024 packed; all other image datablocks are listed in inventory JSON.
 - **Modifiers / animation:** none; animated source objects: none on retained objects; actions: none.
-- **Web result:** 2 meshes, 15,360 triangles, 2 embedded textures (2048×1024, 1024×512), 0.98 MiB. This source names its main mesh Uranus. Neither retained mesh has a UV map, so spherical UVs are generated on the web copies. The outer Clouds shell is retained; two inner cloud/atmosphere shells are omitted because they sit inside the surface and provide no visible exterior detail. Diffuse/Mix/Displacement nodes become textured PBR plus alpha cloud layer.
+- **Web result:** 1 meshes, 36,480 triangles, 1 embedded textures (2048×1024), 0.90 MiB. The improved Neptune retains only the upgraded procedural surface from Neptune_Improved_02.blend. Its noise/color-ramp cloud deck is procedural, so the shader output is baked to a 2048×1024 equirectangular texture with Cycles before export; the result is a single textured PBR mesh.
 
 ## Compatibility and limitations
 
-- The original packed color maps are retained at reduced resolution. Existing UVs survive glTF export; spherical UVs were generated for the Sun and Neptune because those source meshes used Blender Generated coordinates and had no UV map. Normal/bump, procedural noise, ColorRamp, Shader to RGB, Layer Weight and Blender displacement networks cannot round-trip as-is; the material conversions are stated above.
+- The original packed color maps are retained at reduced resolution. Existing UVs survive glTF export; spherical UVs were generated for the Sun because that source mesh used Blender Generated coordinates, and for the improved Neptune the procedural shader was baked to an equirectangular texture. Normal/bump, procedural noise, ColorRamp, Shader to RGB, Layer Weight and Blender displacement networks cannot round-trip as-is unless baked; the material conversions are stated above.
 - Transparent clouds and rings use alpha generated from their supplied images. Saturn's ring mesh and Earth's clouds/atmosphere are retained. The Sun uses its actual `Sol` mesh and sun texture, not objects from the composite system file.
 - The source files have a number of unused broken external image references (zero-sized datablocks). The web exports use available packed images; the import check found all expected embedded textures.
 - All source meshes were inspected before export. Subdivision was capped at one viewport level where it improved rounded silhouettes; unrelated geometry and cameras/lights were removed. The model assets were rendered after import for material QA; final on-screen lighting and appearance still need browser visual QA in later milestones.

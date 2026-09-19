@@ -1,5 +1,5 @@
 {
-  "source": "E:\\solor 3d site\\Neuptun Neu.blend",
+  "source": "E:\\solor 3d site\\Neptune_Improved_02.blend",
   "blender": "5.2.2 LTS",
   "objects": [
     {
@@ -81,9 +81,9 @@
       "parent": null,
       "children": [],
       "dimensions": [
-        2.953,
-        2.9634,
-        2.9758
+        1.8503,
+        1.8569,
+        1.8646
       ],
       "location": [
         0.0,
@@ -191,6 +191,158 @@
       "uv_maps": []
     },
     {
+      "name": "Neptune",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.0,
+        2.0,
+        1.9658
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.3142,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [
+        "Neptune • subtle blue-green cloud tops.001"
+      ],
+      "animation": false,
+      "vertices": 18242,
+      "polygons": 18432,
+      "triangles": 36480,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Neptune portrait",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        -6.0,
+        1.0
+      ],
+      "rotation_euler": [
+        1.4056,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Neptune portrait.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        -6.0,
+        1.0
+      ],
+      "rotation_euler": [
+        1.4056,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Neptune • atmospheric haze",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.016,
+        2.016,
+        1.9815
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.3142,
+        0.0
+      ],
+      "scale": [
+        1.008,
+        1.008,
+        1.008
+      ],
+      "modifiers": [],
+      "materials": [
+        "Neptune • scattering atmosphere.001"
+      ],
+      "animation": false,
+      "vertices": 18242,
+      "polygons": 18432,
+      "triangles": 36480,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
       "name": "Sun",
       "type": "LIGHT",
       "hidden_viewport": false,
@@ -214,6 +366,74 @@
         1.3792,
         0.5363,
         0.9123
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Sun • directional illumination",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        1.2038,
+        -0.0,
+        -0.6147
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Sun • directional illumination.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Scene Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        1.2038,
+        -0.0,
+        -0.6147
       ],
       "scale": [
         1.0,
@@ -269,9 +489,9 @@
       "parent": null,
       "children": [],
       "dimensions": [
-        2.9168,
-        2.9271,
-        2.9393
+        1.8503,
+        1.8569,
+        1.8646
       ],
       "location": [
         0.0,
@@ -376,34 +596,38 @@
       "principled": false
     },
     {
-      "name": "Uranus",
+      "name": "Neptune • scattering atmosphere.001",
       "blend_method": "DITHERED",
       "alpha": 1.0,
       "node_types": [
         "ShaderNodeOutputMaterial",
-        "ShaderNodeBsdfDiffuse",
-        "ShaderNodeTexImage",
-        "ShaderNodeTexCoord",
-        "ShaderNodeTexCoord",
-        "ShaderNodeTexImage",
-        "ShaderNodeMath",
-        "ShaderNodeDisplacement"
+        "ShaderNodeVolumeScatter"
       ],
-      "image_nodes": [
-        {
-          "node": "Image Texture",
-          "image": "Uranus Textur.jpg"
-        },
-        {
-          "node": "Image Texture.001",
-          "image": "Uranus Textur.jpg"
-        }
-      ],
+      "image_nodes": [],
       "emission_nodes": [],
       "principled": false
     },
     {
-      "name": "Uranus.001",
+      "name": "Neptune • subtle blue-green cloud tops.001",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexCoord",
+        "ShaderNodeVectorMath",
+        "ShaderNodeTexNoise",
+        "ShaderNodeValToRGB",
+        "ShaderNodeTexNoise",
+        "ShaderNodeMapRange",
+        "ShaderNodeMixRGB"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Uranus",
       "blend_method": "DITHERED",
       "alpha": 1.0,
       "node_types": [
@@ -466,25 +690,13 @@
       "height": 1024,
       "channels": 4,
       "colorspace": "Non-Color"
-    },
-    {
-      "name": "Viewer Node",
-      "source": "VIEWER",
-      "file": "",
-      "resolved_file": "",
-      "exists": false,
-      "packed": false,
-      "width": 256,
-      "height": 256,
-      "channels": 4,
-      "colorspace": ""
     }
   ],
   "totals": {
-    "meshes": 4,
-    "triangles": 30720,
-    "cameras": 2,
-    "lights": 2,
+    "meshes": 6,
+    "triangles": 103680,
+    "cameras": 4,
+    "lights": 4,
     "empties": 0
   },
   "actions": [],
