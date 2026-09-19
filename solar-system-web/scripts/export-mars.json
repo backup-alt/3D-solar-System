@@ -1,0 +1,14 @@
+{
+  "asset": "mars",
+  "source": "E:\\solor 3d site\\4k Planet Mars.blend",
+  "objects": [
+    "Mars",
+    "Atmoshpere"
+  ],
+  "triangle_count": 1920,
+  "diameter_before_normalization": 2.9370923042297363,
+  "textures": [
+    "00_5672_marsmap4k.jpg"
+  ],
+  "glb_bytes": 638132
+}

@@ -1,0 +1,19 @@
+{
+  "asset": "uranus",
+  "source": "E:\\solor 3d site\\Planet Uranus.blend",
+  "objects": [
+    "Neptune",
+    "Circle"
+  ],
+  "triangle_count": 1216,
+  "diameter_before_normalization": 3.6807026863098145,
+  "textures": [
+    "00_uranusmap.jpg",
+    "01_uranusringcolour.png",
+    "02_uranusmap.jpg",
+    "03_uranusringcolour.png",
+    "04_uranusmap.jpg",
+    "05_uranusringcolour.png"
+  ],
+  "glb_bytes": 130092
+}

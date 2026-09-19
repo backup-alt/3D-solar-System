@@ -1,0 +1,458 @@
+{
+  "source": "E:\\solor 3d site\\4k Planet Mars.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Atmoshpere",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": "Mars",
+      "children": [],
+      "dimensions": [
+        1.9688,
+        1.9688,
+        1.9688
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.003,
+        1.003,
+        1.003
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Atmosphere"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        3.409,
+        -3.8193,
+        0.8066
+      ],
+      "rotation_euler": [
+        1.4235,
+        -0.0,
+        0.7172
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.5292,
+        -2.4994,
+        -0.8303
+      ],
+      "rotation_euler": [
+        1.7308,
+        -0.0,
+        1.0686
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Jupiter",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.9681,
+        1.9681,
+        1.9923
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0422,
+        -0.1317,
+        0.4671
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [
+        "Jupiter 2"
+      ],
+      "animation": false,
+      "vertices": 7938,
+      "polygons": 7936,
+      "triangles": 15872,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        -0.9475,
+        -0.1004,
+        1.2952
+      ],
+      "rotation_euler": [
+        0.9515,
+        0.1925,
+        1.8547
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Light.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        3.0
+      ],
+      "rotation_euler": [
+        1.3527,
+        0.2729,
+        2.1835
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Mars",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [
+        "Atmoshpere"
+      ],
+      "dimensions": [
+        1.963,
+        1.963,
+        1.963
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.11,
+        -0.1284,
+        -2.6463
+      ],
+      "scale": [
+        0.9815,
+        0.9815,
+        0.9815
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Mars"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Atmosphere",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeMixShader",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeEmission",
+        "ShaderNodeValToRGB",
+        "ShaderNodeSeparateXYZ",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMix",
+        "ShaderNodeValToRGB",
+        "ShaderNodeMapping"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    },
+    {
+      "name": "Dots Stroke",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "NodeFrame",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Jupiter 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Jupitermap_edited.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Mars",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeTexImage",
+        "ShaderNodeHueSaturation"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "5672_marsmap4k.jpg.001"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "5672_marsbump4k.jpg.001"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    }
+  ],
+  "images": [
+    {
+      "name": "5672_marsbump4k.jpg.001",
+      "source": "FILE",
+      "file": "//..\\Textures\\5672_marsbump4k.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\5672_marsbump4k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4000,
+      "height": 2000,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "5672_marsmap4k.jpg.001",
+      "source": "FILE",
+      "file": "//..\\Textures\\5672_marsmap4k.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\5672_marsmap4k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4000,
+      "height": 2000,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Jupitermap_edited.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\Jupitermap_edited.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\Jupitermap_edited.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "Viewer Node.001",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 3,
+    "triangles": 17792,
+    "cameras": 2,
+    "lights": 2,
+    "empties": 0
+  },
+  "actions": [
+    "Jupiter 2Action"
+  ],
+  "collections": [
+    {
+      "name": "Collection",
+      "objects": [
+        "Light",
+        "Camera",
+        "Mars",
+        "Atmoshpere"
+      ]
+    },
+    {
+      "name": "Collection.001",
+      "objects": [
+        "Light.001",
+        "Camera.001",
+        "Jupiter"
+      ]
+    }
+  ]
+}

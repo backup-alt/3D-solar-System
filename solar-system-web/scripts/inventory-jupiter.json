@@ -1,0 +1,750 @@
+{
+  "source": "E:\\solor 3d site\\Planet Jupiter.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Atmosphere",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": "Earth",
+      "children": [],
+      "dimensions": [
+        2.1,
+        2.1,
+        2.1
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Atmosphere"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.5292,
+        -2.4994,
+        -0.8303
+      ],
+      "rotation_euler": [
+        1.7308,
+        -0.0,
+        1.0686
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        1.6238,
+        -6.5221,
+        -1.5024
+      ],
+      "rotation_euler": [
+        1.7919,
+        -0.0,
+        0.2187
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Clouds",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": "Earth",
+      "children": [],
+      "dimensions": [
+        2.04,
+        2.04,
+        2.04
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Clouds procedural"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Earth",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [
+        "Atmosphere",
+        "Clouds"
+      ],
+      "dimensions": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        3.2804
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Earth"
+      ],
+      "animation": true,
+      "vertices": 1986,
+      "polygons": 1984,
+      "triangles": 3968,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.9681,
+        1.9681,
+        1.9923
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0422,
+        -0.1317,
+        0.4671
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [
+        "Jupiter 2"
+      ],
+      "animation": false,
+      "vertices": 7938,
+      "polygons": 7936,
+      "triangles": 15872,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        3.0
+      ],
+      "rotation_euler": [
+        1.3527,
+        0.2729,
+        2.1835
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Light.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [
+        "Sphere.004"
+      ],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        -1.7646,
+        0.519,
+        1.2181
+      ],
+      "rotation_euler": [
+        -0.424,
+        0.7215,
+        -0.4459
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Moon",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "location": [
+        32.0,
+        -3.8436,
+        0.1289
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.1247,
+        0.1247,
+        0.1247
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Moon"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Sphere.004",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": "Light.001",
+      "children": [],
+      "dimensions": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "location": [
+        -3.521,
+        2.9804,
+        1.2498
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.0037,
+        0.0037,
+        0.0037
+      ],
+      "modifiers": [],
+      "materials": [
+        "Sun"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Atmosphere",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeMixShader",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeEmission",
+        "ShaderNodeValToRGB",
+        "ShaderNodeSeparateXYZ",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMix",
+        "ShaderNodeValToRGB",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    },
+    {
+      "name": "Clouds procedural",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexNoise",
+        "ShaderNodeTexNoise",
+        "ShaderNodeValToRGB",
+        "ShaderNodeTexNoise",
+        "ShaderNodeMix",
+        "ShaderNodeBump",
+        "ShaderNodeValue"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "storm_clouds_8k.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Dots Stroke",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "NodeFrame",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Earth",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeBump",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeValToRGB",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture.002",
+          "image": "8081_earthspec10k.jpg"
+        },
+        {
+          "node": "Image Texture.003",
+          "image": "8081_earthlights10k.jpg"
+        },
+        {
+          "node": "Image Texture",
+          "image": "8081_earthmap10k.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "8081_earthbump10k.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Jupiter 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeValToRGB",
+        "ShaderNodeHueSaturation"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Jupitermap_edited(3).jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Moon",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "moonmap4k.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "moonbump4k.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Sun",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeEmission"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    }
+  ],
+  "images": [
+    {
+      "name": "8081_earthbump10k.jpg",
+      "source": "FILE",
+      "file": "//8081_earthbump10k.jpg",
+      "resolved_file": "E:\\solor 3d site\\8081_earthbump10k.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "8081_earthlights10k.jpg",
+      "source": "FILE",
+      "file": "//8081_earthlights10k.jpg",
+      "resolved_file": "E:\\solor 3d site\\8081_earthlights10k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 10800,
+      "height": 5400,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "8081_earthmap10k.jpg",
+      "source": "FILE",
+      "file": "//8081_earthmap10k.jpg",
+      "resolved_file": "E:\\solor 3d site\\8081_earthmap10k.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "8081_earthspec10k.jpg",
+      "source": "FILE",
+      "file": "//8081_earthspec10k.jpg",
+      "resolved_file": "E:\\solor 3d site\\8081_earthspec10k.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "DOT",
+      "source": "FILE",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": true,
+      "width": 1024,
+      "height": 1024,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Jupitermap_edited(3).jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\Jupitermap_edited(3).jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\Jupitermap_edited(3).jpg",
+      "exists": false,
+      "packed": true,
+      "width": 3601,
+      "height": 1801,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "moonbump4k.jpg",
+      "source": "FILE",
+      "file": "//moonbump4k.jpg",
+      "resolved_file": "E:\\solor 3d site\\moonbump4k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4000,
+      "height": 2000,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "moonmap4k.jpg",
+      "source": "FILE",
+      "file": "//moonmap4k.jpg",
+      "resolved_file": "E:\\solor 3d site\\moonmap4k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4000,
+      "height": 2000,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "storm_clouds_8k.jpg",
+      "source": "FILE",
+      "file": "//storm_clouds_8k.jpg",
+      "resolved_file": "E:\\solor 3d site\\storm_clouds_8k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Viewer Node.001",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 6,
+    "triangles": 23680,
+    "cameras": 2,
+    "lights": 2,
+    "empties": 0
+  },
+  "actions": [
+    "EarthAction",
+    "Jupiter 2Action"
+  ],
+  "collections": [
+    {
+      "name": "Collection",
+      "objects": [
+        "Light",
+        "Camera",
+        "Jupiter"
+      ]
+    },
+    {
+      "name": "Collection.001",
+      "objects": [
+        "Light.001",
+        "Earth",
+        "Clouds",
+        "Moon",
+        "Atmosphere",
+        "Sphere.004",
+        "Camera.001"
+      ]
+    }
+  ]
+}

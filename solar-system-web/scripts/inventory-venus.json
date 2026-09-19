@@ -1,0 +1,391 @@
+{
+  "source": "E:\\solor 3d site\\Venus.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        7.8822,
+        -9.424,
+        2.2918
+      ],
+      "rotation_euler": [
+        1.388,
+        0.0145,
+        0.6935
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.1028,
+        -7.9027,
+        2.9907
+      ],
+      "rotation_euler": [
+        1.2064,
+        0.0102,
+        0.0158
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.002",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        -2.9145,
+        2.1243,
+        0.1473
+      ],
+      "rotation_euler": [
+        1.5904,
+        0.0108,
+        -2.3119
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Sun",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        1.1596,
+        -0.0568,
+        -0.0591
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Venus",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        -1.2928
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Venus"
+      ],
+      "animation": false,
+      "vertices": 2114,
+      "polygons": 2176,
+      "triangles": 4224,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Venus Clouds",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.0062,
+        2.0062,
+        2.0062
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        1.3423
+      ],
+      "scale": [
+        1.0031,
+        1.0031,
+        1.0031
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Venus Clouds"
+      ],
+      "animation": false,
+      "vertices": 2114,
+      "polygons": 2176,
+      "triangles": 4224,
+      "uv_maps": [
+        "UVMap"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Venus",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeShaderToRGB",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeMixShader",
+        "ShaderNodeMixShader",
+        "ShaderNodeInvert",
+        "ShaderNodeMixShader",
+        "ShaderNodeEmission",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeMixShader",
+        "ShaderNodeEmission",
+        "ShaderNodeEmission",
+        "ShaderNodeBump",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "venus_bump_map_8k.png"
+        },
+        {
+          "node": "Image Texture.002",
+          "image": "venus_surface_8k.jpg"
+        }
+      ],
+      "emission_nodes": [
+        "Emission.002",
+        "Emission.001",
+        "Emission.003"
+      ],
+      "principled": true
+    },
+    {
+      "name": "Venus Clouds",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeShaderToRGB",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeValToRGB",
+        "ShaderNodeMixShader",
+        "ShaderNodeMixShader",
+        "ShaderNodeInvert",
+        "ShaderNodeMixShader",
+        "ShaderNodeEmission",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeMixShader",
+        "ShaderNodeEmission",
+        "ShaderNodeEmission",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeRGBToBW",
+        "ShaderNodeBrightContrast",
+        "ShaderNodeHueSaturation"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "venus_cloud_4k.jpg"
+        }
+      ],
+      "emission_nodes": [
+        "Emission.002",
+        "Emission.001",
+        "Emission.003"
+      ],
+      "principled": true
+    }
+  ],
+  "images": [
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "venus_bump_map_8k.png",
+      "source": "FILE",
+      "file": "//venus_bump_map_8k.png",
+      "resolved_file": "E:\\solor 3d site\\venus_bump_map_8k.png",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "venus_cloud_4k.jpg",
+      "source": "FILE",
+      "file": "//venus_cloud_4k.jpg",
+      "resolved_file": "E:\\solor 3d site\\venus_cloud_4k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4096,
+      "height": 2048,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "venus_surface_8k.jpg",
+      "source": "FILE",
+      "file": "//venus_surface_8k.jpg",
+      "resolved_file": "E:\\solor 3d site\\venus_surface_8k.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    }
+  ],
+  "totals": {
+    "meshes": 2,
+    "triangles": 8448,
+    "cameras": 3,
+    "lights": 1,
+    "empties": 0
+  },
+  "actions": [],
+  "collections": [
+    {
+      "name": "Collection",
+      "objects": [
+        "Venus",
+        "Sun",
+        "Camera",
+        "Venus Clouds",
+        "Camera.001",
+        "Camera.002"
+      ]
+    }
+  ]
+}

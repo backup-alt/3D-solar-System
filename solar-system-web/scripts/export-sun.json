@@ -1,0 +1,15 @@
+{
+  "asset": "sun",
+  "source": "E:\\solor 3d site\\Solar System Assets.blend",
+  "objects": [
+    "Sol"
+  ],
+  "triangle_count": 1088,
+  "diameter_before_normalization": 1390.7724609375,
+  "textures": [
+    "00_sun.jpg",
+    "01_sun.jpg",
+    "02_sun.jpg"
+  ],
+  "glb_bytes": 488664
+}

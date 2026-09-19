@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vite/
+.npm-cache/
+scripts/optimized-textures/
+scripts/browser-qa/chrome-profile/

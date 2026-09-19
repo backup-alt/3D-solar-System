@@ -1,0 +1,14 @@
+{
+  "asset": "jupiter",
+  "source": "E:\\solor 3d site\\Planet Jupiter.blend",
+  "objects": [
+    "Jupiter"
+  ],
+  "triangle_count": 15872,
+  "diameter_before_normalization": 2.8328261375427246,
+  "textures": [
+    "00_Jupitermap_edited(3).jpg",
+    "01_Jupitermap_edited(3).jpg"
+  ],
+  "glb_bytes": 690520
+}

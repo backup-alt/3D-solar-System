@@ -1,0 +1,1064 @@
+{
+  "source": "E:\\solor 3d site\\Solar System Assets.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 11"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        1605.4758,
+        -24.18,
+        0.0
+      ],
+      "rotation_euler": [
+        1.5818,
+        -0.0,
+        -4.7161
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Luna",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": "Tierra",
+      "children": [],
+      "dimensions": [
+        3.4739,
+        3.4739,
+        3.4739
+      ],
+      "location": [
+        1534.4,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.712,
+        0.712,
+        0.712
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Luna"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Marte",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        6.7937,
+        6.7937,
+        6.7937
+      ],
+      "location": [
+        2279.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.3923,
+        1.3923,
+        1.3923
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Marte"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Mercurio",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        4.8782,
+        4.8782,
+        4.8782
+      ],
+      "location": [
+        579.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        0.9998,
+        0.9998,
+        0.9998
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Mercurio"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Plane",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        345.229,
+        345.229,
+        0.0
+      ],
+      "location": [
+        974.2251,
+        -457.8766,
+        23.6387
+      ],
+      "rotation_euler": [
+        -1.1293,
+        1.5708,
+        0.0
+      ],
+      "scale": [
+        172.6145,
+        172.6145,
+        172.6145
+      ],
+      "modifiers": [],
+      "materials": [
+        "Real Sun"
+      ],
+      "animation": false,
+      "vertices": 4,
+      "polygons": 1,
+      "triangles": 2,
+      "uv_maps": []
+    },
+    {
+      "name": "Plane.001",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        62.8877,
+        62.8877,
+        0.0
+      ],
+      "location": [
+        1238.7863,
+        306.8707,
+        16.0738
+      ],
+      "rotation_euler": [
+        0.3544,
+        2.0031,
+        -0.2406
+      ],
+      "scale": [
+        31.4439,
+        31.4439,
+        31.4439
+      ],
+      "modifiers": [],
+      "materials": [
+        "Real Sun"
+      ],
+      "animation": false,
+      "vertices": 4,
+      "polygons": 1,
+      "triangles": 2,
+      "uv_maps": []
+    },
+    {
+      "name": "Sol",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1390.7723,
+        1390.772,
+        1390.7723
+      ],
+      "location": [
+        -695.3787,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        285.0324,
+        285.0324,
+        285.0324
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Sol"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Sun",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 11"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        1467.8391,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        -0.0,
+        -1.644,
+        -0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Tierra",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [
+        "Luna",
+        "TierraAtmosfera",
+        "TierraNuves"
+      ],
+      "dimensions": [
+        12.7563,
+        12.7563,
+        12.7563
+      ],
+      "location": [
+        1496.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        2.6143,
+        2.6143,
+        2.6143
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Tierra"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "TierraAtmosfera",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": "Tierra",
+      "children": [],
+      "dimensions": [
+        12.789,
+        12.789,
+        12.789
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0026,
+        1.0026,
+        1.0026
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "TierraAtmosfera"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "TierraNuves",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": "Tierra",
+      "children": [],
+      "dimensions": [
+        12.7724,
+        12.7724,
+        12.7724
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0013,
+        1.0013,
+        1.0013
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "TierraNuves"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Venus",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": null,
+      "children": [
+        "Venus Atmofera"
+      ],
+      "dimensions": [
+        12.1035,
+        12.1035,
+        12.1035
+      ],
+      "location": [
+        1081.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        2.4806,
+        2.4806,
+        2.4806
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Venus"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    },
+    {
+      "name": "Venus Atmofera",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 10"
+      ],
+      "parent": "Venus",
+      "children": [],
+      "dimensions": [
+        12.1221,
+        12.1221,
+        12.1221
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0015,
+        1.0015,
+        1.0015
+      ],
+      "modifiers": [
+        {
+          "name": "Subsurf",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Venus Clouds"
+      ],
+      "animation": false,
+      "vertices": 546,
+      "polygons": 576,
+      "triangles": 1088,
+      "uv_maps": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "Luna",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeBsdfDiffuse"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "moon.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "moon.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Marte",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeMath",
+        "ShaderNodeBump",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "mars.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "mars.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Mercurio",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeBump"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "mercury.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "mercury.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Real Sun",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeEmission"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    },
+    {
+      "name": "Sol",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMath",
+        "ShaderNodeBump",
+        "ShaderNodeEmission",
+        "ShaderNodeEmission",
+        "ShaderNodeValToRGB",
+        "ShaderNodeTexImage",
+        "ShaderNodeMixShader",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture.001",
+          "image": "sun.jpg"
+        },
+        {
+          "node": "Image Texture",
+          "image": "sun.jpg"
+        }
+      ],
+      "emission_nodes": [
+        "Emission",
+        "Emission.001"
+      ],
+      "principled": false
+    },
+    {
+      "name": "Tierra",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeNormalMap",
+        "ShaderNodeEmission",
+        "ShaderNodeBsdfAnisotropic",
+        "ShaderNodeMixShader",
+        "ShaderNodeTexImage",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeMixShader",
+        "ShaderNodeNormal",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture.002",
+          "image": "earth_normal_map.tif"
+        },
+        {
+          "node": "Image Texture.003",
+          "image": "earth_nightmap.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "earth_specular_map.tif"
+        },
+        {
+          "node": "Image Texture",
+          "image": "earth_daymap.jpg"
+        }
+      ],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    },
+    {
+      "name": "TierraAtmosfera",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeEmission",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeTexCoord",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeMixShader",
+        "ShaderNodeMixShader",
+        "ShaderNodeMixShader",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeMixShader",
+        "ShaderNodeEmission",
+        "ShaderNodeNormal",
+        "ShaderNodeMixShader"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [
+        "Emission",
+        "Emission.001"
+      ],
+      "principled": false
+    },
+    {
+      "name": "TierraNuves",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeBump",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeMixShader"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "earth_clouds.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "earth_clouds.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Venus",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeTexImage",
+        "ShaderNodeEmission",
+        "ShaderNodeMixShader",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeValToRGB",
+        "ShaderNodeMixShader"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture.001",
+          "image": "venus_surface.jpg"
+        },
+        {
+          "node": "Image Texture",
+          "image": "venus_surface.jpg"
+        }
+      ],
+      "emission_nodes": [
+        "Emission"
+      ],
+      "principled": false
+    },
+    {
+      "name": "Venus Clouds",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeMixShader",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeBsdfTranslucent",
+        "ShaderNodeMixShader",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMixShader",
+        "ShaderNodeNormal"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture.001",
+          "image": "2k_venus_atmosphere.jpg"
+        },
+        {
+          "node": "Image Texture",
+          "image": "2k_venus_atmosphere.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    }
+  ],
+  "images": [
+    {
+      "name": "2k_venus_atmosphere.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\2k_venus_atmosphere.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\2k_venus_atmosphere.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 2048,
+      "height": 1024,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "earth_clouds.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\earth_clouds.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\earth_clouds.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "earth_daymap.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\earth_daymap.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\earth_daymap.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "earth_nightmap.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\earth_nightmap.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\earth_nightmap.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "earth_normal_map.tif",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\earth_normal_map.tif",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\earth_normal_map.tif",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "earth_specular_map.tif",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\earth_specular_map.tif",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\earth_specular_map.tif",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "mars.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\mars.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\mars.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "mercury.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\mercury.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\mercury.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "moon.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\moon.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\moon.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "stars_milky_way.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\stars_milky_way.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\stars_milky_way.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "sun.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\sun.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\sun.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4096,
+      "height": 2048,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "venus_surface.jpg",
+      "source": "FILE",
+      "file": "M:\\Blender\\Solar System Textures\\venus_surface.jpg",
+      "resolved_file": "M:\\Blender\\Solar System Textures\\venus_surface.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 8192,
+      "height": 4096,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "Viewer Node",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 11,
+    "triangles": 9796,
+    "cameras": 1,
+    "lights": 1,
+    "empties": 0
+  },
+  "actions": [],
+  "collections": [
+    {
+      "name": "Collection 10",
+      "objects": [
+        "Plane.001",
+        "Plane",
+        "Sol",
+        "Marte",
+        "Tierra",
+        "TierraAtmosfera",
+        "TierraNuves",
+        "Luna",
+        "Mercurio",
+        "Venus",
+        "Venus Atmofera"
+      ]
+    },
+    {
+      "name": "Collection 11",
+      "objects": [
+        "Sun",
+        "Camera"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "asset": "earth",
+  "source": "E:\\solor 3d site\\10k Planet Earth.blend",
+  "objects": [
+    "Earth",
+    "Clouds",
+    "Atmosphere"
+  ],
+  "triangle_count": 5888,
+  "diameter_before_normalization": 2.2681546211242676,
+  "textures": [
+    "00_8081_earthmap10k.jpg",
+    "01_earthcloudmap.png",
+    "02_8081_earthmap10k.jpg",
+    "03_8081_earthlights10k.jpg",
+    "04_earthcloudmap.png",
+    "05_8081_earthmap10k.jpg",
+    "06_8081_earthlights10k.jpg",
+    "07_earthcloudmap.png"
+  ],
+  "glb_bytes": 2327088
+}

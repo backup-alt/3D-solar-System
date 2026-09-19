@@ -1,0 +1,226 @@
+{
+  "earth.glb": {
+    "imported": true,
+    "objects": [
+      "Atmosphere",
+      "Clouds",
+      "Earth",
+      "EARTH_ROOT"
+    ],
+    "meshes": 3,
+    "triangles": 11904,
+    "materials": [
+      "WEB_earth_atmosphere",
+      "WEB_earth_cloud",
+      "WEB_earth_surface"
+    ],
+    "images": [
+      {
+        "name": "05_8081_earthmap10k",
+        "width": 4096,
+        "height": 2048
+      },
+      {
+        "name": "06_8081_earthlights10k",
+        "width": 2048,
+        "height": 1024
+      },
+      {
+        "name": "07_earthcloudmap",
+        "width": 1024,
+        "height": 512
+      }
+    ],
+    "bytes": 2327088
+  },
+  "jupiter.glb": {
+    "imported": true,
+    "objects": [
+      "Jupiter",
+      "JUPITER_ROOT"
+    ],
+    "meshes": 1,
+    "triangles": 15872,
+    "materials": [
+      "WEB_jupiter_surface"
+    ],
+    "images": [
+      {
+        "name": "01_Jupitermap_edited(3)",
+        "width": 2048,
+        "height": 1024
+      }
+    ],
+    "bytes": 690520
+  },
+  "mars.glb": {
+    "imported": true,
+    "objects": [
+      "Atmoshpere",
+      "Mars",
+      "MARS_ROOT"
+    ],
+    "meshes": 2,
+    "triangles": 7936,
+    "materials": [
+      "WEB_mars_atmosphere",
+      "WEB_mars_surface"
+    ],
+    "images": [
+      {
+        "name": "00_5672_marsmap4k",
+        "width": 2048,
+        "height": 1024
+      }
+    ],
+    "bytes": 638132
+  },
+  "mercury.glb": {
+    "imported": true,
+    "objects": [
+      "MERCURY_ROOT",
+      "Sphere"
+    ],
+    "meshes": 1,
+    "triangles": 3968,
+    "materials": [
+      "WEB_mercury_surface"
+    ],
+    "images": [
+      {
+        "name": "00_Mercury_Texture_Map",
+        "width": 2048,
+        "height": 1024
+      }
+    ],
+    "bytes": 772236
+  },
+  "neptune.glb": {
+    "imported": true,
+    "objects": [
+      "Clouds",
+      "NEPTUNE_ROOT",
+      "Uranus"
+    ],
+    "meshes": 2,
+    "triangles": 15360,
+    "materials": [
+      "WEB_neptune_cloud",
+      "WEB_neptune_surface"
+    ],
+    "images": [
+      {
+        "name": "04_Uranus Textur",
+        "width": 2048,
+        "height": 1024
+      },
+      {
+        "name": "05_clouds",
+        "width": 1024,
+        "height": 512
+      }
+    ],
+    "bytes": 1023708
+  },
+  "saturn.glb": {
+    "imported": true,
+    "objects": [
+      "Circle",
+      "SATURN_ROOT",
+      "Sphere"
+    ],
+    "meshes": 2,
+    "triangles": 4096,
+    "materials": [
+      "WEB_saturn_ring",
+      "WEB_saturn_surface"
+    ],
+    "images": [
+      {
+        "name": "04_saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy",
+        "width": 2048,
+        "height": 1024
+      },
+      {
+        "name": "05_Saturn rings",
+        "width": 1024,
+        "height": 576
+      }
+    ],
+    "bytes": 311284
+  },
+  "sun.glb": {
+    "imported": true,
+    "objects": [
+      "Sol",
+      "SUN_ROOT"
+    ],
+    "meshes": 1,
+    "triangles": 4480,
+    "materials": [
+      "WEB_sun_surface"
+    ],
+    "images": [
+      {
+        "name": "02_sun",
+        "width": 2048,
+        "height": 1024
+      }
+    ],
+    "bytes": 488664
+  },
+  "uranus.glb": {
+    "imported": true,
+    "objects": [
+      "Circle",
+      "Neptune",
+      "URANUS_ROOT"
+    ],
+    "meshes": 2,
+    "triangles": 4224,
+    "materials": [
+      "WEB_uranus_ring",
+      "WEB_uranus_surface"
+    ],
+    "images": [
+      {
+        "name": "04_uranusmap",
+        "width": 1024,
+        "height": 512
+      },
+      {
+        "name": "05_uranusringcolour",
+        "width": 1024,
+        "height": 72
+      }
+    ],
+    "bytes": 130092
+  },
+  "venus.glb": {
+    "imported": true,
+    "objects": [
+      "Venus",
+      "Venus Clouds",
+      "VENUS_ROOT"
+    ],
+    "meshes": 2,
+    "triangles": 8448,
+    "materials": [
+      "WEB_venus_cloud",
+      "WEB_venus_surface"
+    ],
+    "images": [
+      {
+        "name": "02_venus_surface_8k",
+        "width": 4096,
+        "height": 2048
+      },
+      {
+        "name": "03_venus_cloud_4k",
+        "width": 2048,
+        "height": 1024
+      }
+    ],
+    "bytes": 5234876
+  }
+}

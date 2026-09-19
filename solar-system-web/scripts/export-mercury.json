@@ -1,0 +1,13 @@
+{
+  "asset": "mercury",
+  "source": "E:\\solor 3d site\\Planet Mercury.blend",
+  "objects": [
+    "Sphere"
+  ],
+  "triangle_count": 960,
+  "diameter_before_normalization": 2.743469476699829,
+  "textures": [
+    "00_Mercury_Texture_Map.jpg"
+  ],
+  "glb_bytes": 772236
+}

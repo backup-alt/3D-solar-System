@@ -1,0 +1,470 @@
+{
+  "source": "E:\\solor 3d site\\Planet Uranus.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        5.3028,
+        -7.983,
+        3.5268
+      ],
+      "rotation_euler": [
+        1.2094,
+        -0.0,
+        0.5811
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.5292,
+        -2.4994,
+        -0.8303
+      ],
+      "rotation_euler": [
+        1.7308,
+        -0.0,
+        1.0686
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Circle",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": "Neptune",
+      "children": [],
+      "dimensions": [
+        5.0311,
+        5.0311,
+        0.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.1631,
+        0.8469,
+        0.4479
+      ],
+      "scale": [
+        2.1809,
+        2.1809,
+        2.1809
+      ],
+      "modifiers": [],
+      "materials": [
+        "Rings uranus"
+      ],
+      "animation": false,
+      "vertices": 192,
+      "polygons": 128,
+      "triangles": 256,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.9681,
+        1.9681,
+        1.9923
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0422,
+        -0.1317,
+        0.4671
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [
+        "Jupiter 2"
+      ],
+      "animation": false,
+      "vertices": 7938,
+      "polygons": 7936,
+      "triangles": 15872,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        3.0
+      ],
+      "rotation_euler": [
+        0.7709,
+        0.1078,
+        1.5954
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Light.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        3.0
+      ],
+      "rotation_euler": [
+        1.3527,
+        0.2729,
+        2.1835
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Neptune",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [
+        "Circle"
+      ],
+      "dimensions": [
+        2.2289,
+        2.2289,
+        2.2289
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.1631,
+        0.8469,
+        0.4479
+      ],
+      "scale": [
+        1.1145,
+        1.1145,
+        1.1145
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Uranus"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Dots Stroke",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "NodeFrame",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Jupiter 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Jupitermap_edited.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Rings uranus",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "uranusringcolour.jpg.001"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "uranusringtrans.gif.001"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Uranus",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "uranusmap.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    }
+  ],
+  "images": [
+    {
+      "name": "Jupitermap_edited.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\Jupitermap_edited.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\Jupitermap_edited.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "uranusmap.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\uranusmap.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\uranusmap.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 1024,
+      "height": 512,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "uranusringcolour.jpg.001",
+      "source": "FILE",
+      "file": "//..\\Textures\\uranusringcolour.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\uranusringcolour.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 1024,
+      "height": 72,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "uranusringtrans.gif",
+      "source": "MOVIE",
+      "file": "//uranusringtrans.gif",
+      "resolved_file": "E:\\solor 3d site\\uranusringtrans.gif",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "uranusringtrans.gif.001",
+      "source": "MOVIE",
+      "file": "//..\\Textures\\uranusringtrans.gif",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\uranusringtrans.gif",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Viewer Node.001",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 3,
+    "triangles": 17088,
+    "cameras": 2,
+    "lights": 2,
+    "empties": 0
+  },
+  "actions": [
+    "Jupiter 2Action"
+  ],
+  "collections": [
+    {
+      "name": "Collection",
+      "objects": [
+        "Light",
+        "Camera",
+        "Neptune",
+        "Circle"
+      ]
+    },
+    {
+      "name": "Collection.001",
+      "objects": [
+        "Light.001",
+        "Camera.001",
+        "Jupiter"
+      ]
+    }
+  ]
+}

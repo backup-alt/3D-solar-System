@@ -1,0 +1,67 @@
+{
+  "desktop": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "hero": {
+      "chapters": 8,
+      "models": "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune",
+      "scrollWidth": 1440,
+      "innerWidth": 1440
+    },
+    "mercury": {
+      "active": true,
+      "debug": "FPS 30 | CHAPTER mercury | CAMERA 1.73, 0.27, -3.78"
+    },
+    "venus": {
+      "active": true,
+      "debug": "FPS 20 | CHAPTER venus | CAMERA -4.05, 0.29, -3.88"
+    },
+    "earth": {
+      "active": true,
+      "debug": "FPS 20 | CHAPTER earth | CAMERA -1.90, 0.25, 6.95"
+    },
+    "mars": {
+      "active": true,
+      "debug": "FPS 23 | CHAPTER mars | CAMERA 7.45, 0.13, 3.52"
+    },
+    "jupiter": {
+      "active": true,
+      "debug": "FPS 23 | CHAPTER jupiter | CAMERA 8.59, 0.57, 0.06"
+    },
+    "saturn": {
+      "active": true,
+      "debug": "FPS 34 | CHAPTER saturn | CAMERA -8.62, 0.77, 2.63"
+    },
+    "uranus": {
+      "active": true,
+      "debug": "FPS 54 | CHAPTER uranus | CAMERA 2.14, 1.28, 19.34"
+    },
+    "neptune": {
+      "active": true,
+      "debug": "FPS 20 | CHAPTER neptune | CAMERA 14.48, 0.44, 11.13"
+    }
+  },
+  "mobile": {
+    "viewport": {
+      "width": 393,
+      "height": 852
+    },
+    "hero": {
+      "chapters": 8,
+      "models": "sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune",
+      "scrollWidth": 393,
+      "innerWidth": 393
+    },
+    "mercury": {
+      "active": true,
+      "debug": "FPS 58 | CHAPTER mercury | CAMERA 0.94, 0.29, -3.45"
+    },
+    "neptune": {
+      "active": true,
+      "debug": "FPS 20 | CHAPTER neptune | CAMERA 6.85, 0.69, 8.53"
+    }
+  },
+  "problems": []
+}

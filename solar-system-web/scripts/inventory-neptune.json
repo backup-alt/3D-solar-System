@@ -1,0 +1,511 @@
+{
+  "source": "E:\\solor 3d site\\Neuptun Neu.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        -6.5025,
+        -0.0
+      ],
+      "rotation_euler": [
+        1.5708,
+        0.6339,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        0.0,
+        -6.5025,
+        -0.0
+      ],
+      "rotation_euler": [
+        1.5708,
+        0.6339,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Clouds",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.953,
+        2.9634,
+        2.9758
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        2.5507
+      ],
+      "scale": [
+        1.5959,
+        1.5959,
+        1.5959
+      ],
+      "modifiers": [],
+      "materials": [
+        "clouds"
+      ],
+      "animation": false,
+      "vertices": 3842,
+      "polygons": 3840,
+      "triangles": 7680,
+      "uv_maps": []
+    },
+    {
+      "name": "Clouds.001",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.8503,
+        1.8569,
+        1.8646
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        2.5507
+      ],
+      "scale": [
+        1.5959,
+        1.5959,
+        1.5959
+      ],
+      "modifiers": [],
+      "materials": [
+        "clouds.001"
+      ],
+      "animation": false,
+      "vertices": 3842,
+      "polygons": 3840,
+      "triangles": 7680,
+      "uv_maps": []
+    },
+    {
+      "name": "Clouds.002",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.8503,
+        1.8569,
+        1.8646
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        -0.0,
+        2.5507
+      ],
+      "scale": [
+        1.6035,
+        1.6035,
+        1.6035
+      ],
+      "modifiers": [],
+      "materials": [
+        "atmo"
+      ],
+      "animation": false,
+      "vertices": 3842,
+      "polygons": 3840,
+      "triangles": 7680,
+      "uv_maps": []
+    },
+    {
+      "name": "Sun",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        3.8323,
+        -0.0,
+        1.9213
+      ],
+      "rotation_euler": [
+        1.3792,
+        0.5363,
+        0.9123
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Sun.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        3.8323,
+        -0.0,
+        1.9213
+      ],
+      "rotation_euler": [
+        1.3792,
+        0.5363,
+        0.9123
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Uranus",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection 1.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        2.9168,
+        2.9271,
+        2.9393
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        -0.1214,
+        -0.3142,
+        3.5176
+      ],
+      "scale": [
+        1.5764,
+        1.5764,
+        1.5764
+      ],
+      "modifiers": [],
+      "materials": [
+        "Uranus"
+      ],
+      "animation": false,
+      "vertices": 3842,
+      "polygons": 3840,
+      "triangles": 7680,
+      "uv_maps": []
+    }
+  ],
+  "materials": [
+    {
+      "name": "atmo",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfAnisotropic",
+        "ShaderNodeMixShader",
+        "ShaderNodeMixShader",
+        "ShaderNodeLayerWeight",
+        "ShaderNodeBsdfTransparent"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "clouds",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeMixShader",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMath",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "clouds.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "clouds.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "clouds.001",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeMixShader",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeMath",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeBsdfTransparent",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "clouds.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "clouds.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Uranus",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeMath",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Uranus Textur.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Uranus Textur.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    },
+    {
+      "name": "Uranus.001",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexCoord",
+        "ShaderNodeTexImage",
+        "ShaderNodeMath",
+        "ShaderNodeDisplacement"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Uranus Textur.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "Uranus Textur.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": false
+    }
+  ],
+  "images": [
+    {
+      "name": "clouds.jpg",
+      "source": "FILE",
+      "file": "//clouds.jpg",
+      "resolved_file": "E:\\solor 3d site\\clouds.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 2048,
+      "height": 1024,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "Uranus Textur.jpg",
+      "source": "FILE",
+      "file": "//textures\\Uranus Textur.jpg",
+      "resolved_file": "E:\\solor 3d site\\textures\\Uranus Textur.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 2048,
+      "height": 1024,
+      "channels": 4,
+      "colorspace": "Non-Color"
+    },
+    {
+      "name": "Viewer Node",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 4,
+    "triangles": 30720,
+    "cameras": 2,
+    "lights": 2,
+    "empties": 0
+  },
+  "actions": [],
+  "collections": [
+    {
+      "name": "Collection 1",
+      "objects": [
+        "Clouds.002",
+        "Clouds.001",
+        "Sun.001",
+        "Camera.001"
+      ]
+    },
+    {
+      "name": "Collection 1.001",
+      "objects": [
+        "Clouds",
+        "Sun",
+        "Uranus",
+        "Camera"
+      ]
+    }
+  ]
+}

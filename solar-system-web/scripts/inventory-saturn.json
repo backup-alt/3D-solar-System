@@ -1,0 +1,469 @@
+{
+  "source": "E:\\solor 3d site\\Planet Saturn.blend",
+  "blender": "5.2.2 LTS",
+  "objects": [
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        8.7428,
+        -10.0562,
+        1.2871
+      ],
+      "rotation_euler": [
+        1.4865,
+        -0.0,
+        -5.566
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Camera.001",
+      "type": "CAMERA",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.5292,
+        -2.4994,
+        -0.8303
+      ],
+      "rotation_euler": [
+        1.7308,
+        -0.0,
+        1.0686
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Circle",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": "Sphere",
+      "children": [],
+      "dimensions": [
+        5.2658,
+        5.2658,
+        0.0
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.7608,
+        1.7608,
+        1.7608
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Rings 2"
+      ],
+      "animation": false,
+      "vertices": 128,
+      "polygons": 64,
+      "triangles": 128,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Jupiter",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        1.9681,
+        1.9681,
+        1.9923
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation_euler": [
+        0.0422,
+        -0.1317,
+        0.4671
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [
+        "Jupiter 2"
+      ],
+      "animation": false,
+      "vertices": 7938,
+      "polygons": 7936,
+      "triangles": 15872,
+      "uv_maps": [
+        "UVMap"
+      ]
+    },
+    {
+      "name": "Light",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        0.0
+      ],
+      "rotation_euler": [
+        1.5048,
+        0.4626,
+        1.9063
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Light.001",
+      "type": "LIGHT",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection.001"
+      ],
+      "parent": null,
+      "children": [],
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "location": [
+        4.0762,
+        1.0055,
+        3.0
+      ],
+      "rotation_euler": [
+        1.3527,
+        0.2729,
+        2.1835
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [],
+      "materials": [],
+      "animation": false
+    },
+    {
+      "name": "Sphere",
+      "type": "MESH",
+      "hidden_viewport": false,
+      "hidden_render": false,
+      "collections": [
+        "Collection"
+      ],
+      "parent": null,
+      "children": [
+        "Circle"
+      ],
+      "dimensions": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "location": [
+        0.0018,
+        0.0015,
+        -0.0001
+      ],
+      "rotation_euler": [
+        -0.0381,
+        0.1838,
+        -0.0429
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "modifiers": [
+        {
+          "name": "Subdivision",
+          "type": "SUBSURF",
+          "show_render": true
+        }
+      ],
+      "materials": [
+        "Saturn 2"
+      ],
+      "animation": false,
+      "vertices": 482,
+      "polygons": 512,
+      "triangles": 960,
+      "uv_maps": [
+        "UVMap"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "Dots Stroke",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "NodeFrame",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfDiffuse"
+      ],
+      "image_nodes": [],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Jupiter 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeTexImage",
+        "ShaderNodeBump",
+        "ShaderNodeValToRGB"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Jupitermap_edited.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Rings 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeTexImage",
+        "ShaderNodeBrightContrast",
+        "ShaderNodeBrightContrast",
+        "ShaderNodeValToRGB",
+        "ShaderNodeHueSaturation"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "Saturn rings.jpg"
+        },
+        {
+          "node": "Image Texture.001",
+          "image": "saturnringpattern.gif.001"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    },
+    {
+      "name": "Saturn 2",
+      "blend_method": "DITHERED",
+      "alpha": 1.0,
+      "node_types": [
+        "ShaderNodeBsdfPrincipled",
+        "ShaderNodeOutputMaterial",
+        "ShaderNodeTexImage",
+        "ShaderNodeHueSaturation",
+        "ShaderNodeHueSaturation"
+      ],
+      "image_nodes": [
+        {
+          "node": "Image Texture",
+          "image": "saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg"
+        }
+      ],
+      "emission_nodes": [],
+      "principled": true
+    }
+  ],
+  "images": [
+    {
+      "name": "Jupitermap_edited.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\Jupitermap_edited.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\Jupitermap_edited.jpg",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Render Result",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": ""
+    },
+    {
+      "name": "Saturn rings.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\Saturn rings.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\Saturn rings.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 1035,
+      "height": 582,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+      "source": "FILE",
+      "file": "//..\\Textures\\saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+      "exists": false,
+      "packed": true,
+      "width": 4096,
+      "height": 2048,
+      "channels": 4,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "saturnringpattern.gif.001",
+      "source": "MOVIE",
+      "file": "//..\\Textures\\saturnringpattern.gif",
+      "resolved_file": "E:\\solor 3d site\\..\\Textures\\saturnringpattern.gif",
+      "exists": false,
+      "packed": false,
+      "width": 0,
+      "height": 0,
+      "channels": 0,
+      "colorspace": "sRGB"
+    },
+    {
+      "name": "Viewer Node.001",
+      "source": "VIEWER",
+      "file": "",
+      "resolved_file": "",
+      "exists": false,
+      "packed": false,
+      "width": 256,
+      "height": 256,
+      "channels": 4,
+      "colorspace": ""
+    }
+  ],
+  "totals": {
+    "meshes": 3,
+    "triangles": 16960,
+    "cameras": 2,
+    "lights": 2,
+    "empties": 0
+  },
+  "actions": [
+    "Jupiter 2Action"
+  ],
+  "collections": [
+    {
+      "name": "Collection",
+      "objects": [
+        "Light",
+        "Camera",
+        "Sphere",
+        "Circle"
+      ]
+    },
+    {
+      "name": "Collection.001",
+      "objects": [
+        "Light.001",
+        "Camera.001",
+        "Jupiter"
+      ]
+    }
+  ]
+}

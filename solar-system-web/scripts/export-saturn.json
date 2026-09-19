@@ -1,0 +1,19 @@
+{
+  "asset": "saturn",
+  "source": "E:\\solor 3d site\\Planet Saturn.blend",
+  "objects": [
+    "Sphere",
+    "Circle"
+  ],
+  "triangle_count": 1088,
+  "diameter_before_normalization": 2.405414581298828,
+  "textures": [
+    "00_saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+    "01_Saturn rings.png",
+    "02_saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+    "03_Saturn rings.png",
+    "04_saturn_planetary_texture_stock_image_by_uxmal750ad_d8f7djy.jpg",
+    "05_Saturn rings.png"
+  ],
+  "glb_bytes": 311284
+}

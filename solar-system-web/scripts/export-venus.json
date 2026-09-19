@@ -1,0 +1,17 @@
+{
+  "asset": "venus",
+  "source": "E:\\solor 3d site\\Venus.blend",
+  "objects": [
+    "Venus",
+    "Venus Clouds"
+  ],
+  "triangle_count": 8448,
+  "diameter_before_normalization": 2.4720513820648193,
+  "textures": [
+    "00_venus_surface_8k.jpg",
+    "01_venus_cloud_4k.png",
+    "02_venus_surface_8k.jpg",
+    "03_venus_cloud_4k.png"
+  ],
+  "glb_bytes": 5234876
+}

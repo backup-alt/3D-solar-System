@@ -1,0 +1,19 @@
+{
+  "asset": "neptune",
+  "source": "E:\\solor 3d site\\Neuptun Neu.blend",
+  "objects": [
+    "Uranus",
+    "Clouds"
+  ],
+  "triangle_count": 15360,
+  "diameter_before_normalization": 4.514700889587402,
+  "textures": [
+    "00_Uranus Textur.jpg",
+    "01_clouds.png",
+    "02_Uranus Textur.jpg",
+    "03_clouds.png",
+    "04_Uranus Textur.jpg",
+    "05_clouds.png"
+  ],
+  "glb_bytes": 1023708
+}
