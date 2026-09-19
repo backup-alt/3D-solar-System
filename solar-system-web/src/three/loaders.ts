@@ -14,7 +14,7 @@ const failures = new Map<ModelId, string>();
 export function loadModel(id: ModelId): Promise<Group> {
   if (promises.has(id)) return promises.get(id)!;
   const promise = new Promise<Group>((resolve, reject) => {
-    loader.load(`/models/${id}.glb`, gltf => {
+    loader.load(`${import.meta.env.BASE_URL}models/${id}.glb`, gltf => {
       loaded.add(id);
       resolve(gltf.scene);
     }, undefined, error => {
