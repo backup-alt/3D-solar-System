@@ -68,7 +68,7 @@ button{color:inherit}
   .chapter{align-items:flex-end;padding:0 6vw 6vh;justify-content:flex-start;background:linear-gradient(to bottom,transparent 29%,rgba(4,6,11,.0) 43%,rgba(4,6,11,.42) 70%,rgba(4,6,11,.68) 100%)}
   .chapter__content{width:100%;max-width:540px}.chapter__kicker{font-size:8px;gap:9px}.chapter__dash{width:20px}.chapter__category{margin-left:2px}.chapter h2{font-size:clamp(61px,13vw,94px);margin:13px 0 12px}.chapter__description{font-size:14px;line-height:1.45;margin-bottom:17px;max-width:380px}
   .facts{padding-top:14px;row-gap:7px;column-gap:20px}.fact{padding-bottom:8px}.fact dt{font-size:8px;margin-bottom:4px}.fact dd{font-size:13px}.chapter__next{margin-top:12px;font-size:8px}.chapter__next b{font-size:18px}.chapter__watermark{display:none}
-  .story-footer{left:6vw;right:6vw;bottom:10px;font-size:7px;gap:7px 11px}.story-footer span{width:100%}.chapter--neptune{padding-bottom:11vh}
+  .story-footer{left:6vw;right:6vw;bottom:10px;font-size:7px;gap:7px 11px}.story-footer span{width:100%}.chapter--neptune,.chapter--pluto{padding-bottom:11vh}
 }
 @media(max-width:390px){.hero h1{font-size:12.6vw}.chapter h2{font-size:12.2vw}.chapter__description{font-size:13px}.fact dt{font-size:7px}.fact dd{font-size:12px}}
 @media(prefers-reduced-motion:reduce){:root{scroll-behavior:auto}.chapter__content,.loader{transition-duration:.15s}.grain{display:none}}

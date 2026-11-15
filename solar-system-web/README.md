@@ -1,6 +1,6 @@
 # The Solar System
 
-A scroll-driven, real-time 3D journey through the Sun and eight planets, built with raw Three.js, TypeScript, Vite and GSAP ScrollTrigger. The models were exported from the supplied Blender files, with the Sun isolated from `Solar System Assets.blend`.
+A scroll-driven, real-time 3D journey through the Sun, eight planets and a bonus dwarf planet, built with raw Three.js, TypeScript, Vite and GSAP ScrollTrigger. The planet models were exported from the supplied Blender files, with the Sun isolated from `Solar System Assets.blend`. Pluto is generated procedurally in Three.js, so it needs no GLB asset.
 
 ## Run
 
@@ -23,7 +23,7 @@ If this machine's `npm` command points to a missing global install, run npm dire
 
 - `public/models/`: nine self-contained optimized GLBs.
 - `src/data/planets.ts`: all chapter facts and presentation scaling constants.
-- `src/three/`: scene, camera, renderer, stars, lighting, loaders and orbital groups.
+- `src/three/`: scene, camera, renderer, stars, lighting, loaders, procedural dwarf planet and orbital groups.
 - `src/animation/`: delta-time loop and GSAP ScrollTrigger camera journey.
 - `scripts/`: read-only Blender inspection, GLB export and validation scripts, plus JSON reports.
 - `ASSET_REPORT.md`: source inspection and export decisions.

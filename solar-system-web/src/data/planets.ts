@@ -1,4 +1,4 @@
-export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune';
+export type PlanetId = 'mercury' | 'venus' | 'earth' | 'mars' | 'jupiter' | 'saturn' | 'uranus' | 'neptune' | 'pluto';
 
 export interface PlanetData {
   id: PlanetId;
@@ -11,6 +11,7 @@ export interface PlanetData {
   day: string;
   year: string;
   moons: string;
+  dwarf?: boolean;
   radius: number;
   orbitRadius: number;
   orbitYears: number;
@@ -33,6 +34,10 @@ export const planets: PlanetData[] = [
   {id:'saturn', number:'06', name:'Saturn', category:'THE RINGED GIANT', description:'A world of pale storms surrounded by a breathtaking disk of icy rings.', distance:'1.43 billion km', diameter:'120,536 km', day:'10.7 hours', year:'29.45 Earth years', moons:'293', radius:0.94, orbitRadius:12.7, orbitYears:29.45, spinHours:10.7, axialTilt:26.7, orbitInclination:2.49, startAngle:2.7, accent:'#dac5a4'},
   {id:'uranus', number:'07', name:'Uranus', category:'THE SIDEWAYS PLANET', description:'An ice giant tipped almost onto its side, turning through the deep outer dark.', distance:'2.87 billion km', diameter:'51,118 km', day:'17.2 hours', year:'84 Earth years', moons:'29', radius:0.71, orbitRadius:15.1, orbitYears:84, spinHours:-17.2, axialTilt:97.8, orbitInclination:0.77, startAngle:4.55, accent:'#9ed3d7'},
   {id:'neptune', number:'08', name:'Neptune', category:'THE OUTER EDGE', description:'The most distant planet: a deep-blue world swept by supersonic winds.', distance:'4.5 billion km', diameter:'49,528 km', day:'16.1 hours', year:'164.8 Earth years', moons:'16', radius:0.68, orbitRadius:17.4, orbitYears:164.8, spinHours:16.1, axialTilt:28.3, orbitInclination:1.77, startAngle:5.65, accent:'#8ba7e8'},
+  {id:'pluto', number:'09', name:'Pluto', category:'THE DWARF PLANET', description:'A frozen world of nitrogen ice at the edge of the Kuiper Belt, reclassified as a dwarf planet in 2006.', distance:'5.9 billion km', diameter:'2,377 km', day:'6.4 Earth days', year:'248 Earth years', moons:'5', dwarf:true, radius:0.18, orbitRadius:19.8, orbitYears:248, spinHours:153.3, axialTilt:122.5, orbitInclination:17.16, startAngle:3.35, accent:'#c8b39d'},
 ];
 
 export const planetById = Object.fromEntries(planets.map(planet => [planet.id, planet])) as Record<PlanetId, PlanetData>;
+
+export const majorPlanetCount = planets.filter(planet => !planet.dwarf).length;
+export const dwarfPlanetCount = planets.length - majorPlanetCount;

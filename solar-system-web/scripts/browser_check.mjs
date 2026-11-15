@@ -39,8 +39,8 @@ async function check(name, viewport, chapters) {
   return results;
 }
 try {
-  const desktop = await check('desktop', {width:1440,height:900}, ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune']);
-  const mobile = await check('mobile', {width:393,height:852}, ['mercury','neptune']);
+  const desktop = await check('desktop', {width:1440,height:900}, ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','pluto']);
+  const mobile = await check('mobile', {width:393,height:852}, ['mercury','neptune','pluto']);
   const report = { desktop, mobile, problems };
   fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify(report,null,2));
   console.log(JSON.stringify(report,null,2));

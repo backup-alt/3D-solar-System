@@ -10,6 +10,7 @@ export interface JourneyState { progress: number; current: string; }
 export function createScrollJourney() {
   const state: JourneyState = { progress: 0, current: 'overview' };
   const story = document.querySelector<HTMLElement>('.story')!;
+  const chapterTotal = String(planets.length).padStart(2, '0');
 
   // ScrollTrigger writes a single camera progress value. The render loop then
   // combines it with each planet's live orbital position for continuous travel.
@@ -21,7 +22,7 @@ export function createScrollJourney() {
       const current = Math.min(planets.length - 1, Math.max(0, Math.round(state.progress) - 1));
       state.current = state.progress < 0.55 ? 'overview' : planets[current].id;
       const label = document.querySelector<HTMLElement>('.nav__position');
-      if (label) label.textContent = state.progress < 0.55 ? 'OVERVIEW' : `${planets[current].number} / 08`;
+      if (label) label.textContent = state.progress < 0.55 ? 'OVERVIEW' : `${planets[current].number} / ${chapterTotal}`;
     },
     scrollTrigger: { trigger: story, start: 'top top', end: 'bottom bottom', scrub: 1.1, invalidateOnRefresh: true },
   });

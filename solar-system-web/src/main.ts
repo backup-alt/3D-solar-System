@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import './style.css';
-import { planets } from './data/planets';
+import { planets, majorPlanetCount, dwarfPlanetCount } from './data/planets';
 import { createRenderer } from './three/renderer';
 import { createCamera } from './three/camera';
 import { createStars } from './three/stars';
@@ -15,6 +15,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const fact = (label: string, value: string) => `<div class="fact"><dt>${label}</dt><dd>${value}</dd></div>`;
+const chapterTotal = String(planets.length).padStart(2, '0');
+const majorLabel = String(majorPlanetCount).padStart(2, '0');
+const dwarfLabel = dwarfPlanetCount ? ` · ${String(dwarfPlanetCount).padStart(2, '0')} DWARF` : '';
 
 app.innerHTML = `
   <div class="loader" id="loader" role="status" aria-live="polite">
@@ -29,24 +32,24 @@ app.innerHTML = `
     <button class="nav__menu" id="menu-button" type="button" aria-expanded="false" aria-controls="planet-menu">EXPLORE <span class="nav__menu-icon"><i></i><i></i></span></button>
   </header>
   <nav class="planet-menu" id="planet-menu" aria-label="Planet chapters" hidden><span class="planet-menu__label">CHOOSE A DESTINATION</span>${planets.map(p => `<a href="#${p.id}"><span>${p.number}</span>${p.name}</a>`).join('')}</nav>
-  <div class="edge-index" aria-hidden="true"><span>01</span><div class="edge-index__track"><i></i></div><span>08</span></div>
+  <div class="edge-index" aria-hidden="true"><span>01</span><div class="edge-index__track"><i></i></div><span>${chapterTotal}</span></div>
   <main class="story">
     <section class="hero" id="hero" aria-labelledby="hero-title">
-      <div class="hero__topline"><span>EST. 4.6 BILLION YEARS AGO</span><span>01 STAR &nbsp;·&nbsp; 08 PLANETS</span></div>
-      <div class="hero__content"><p class="eyebrow hero__eyebrow">A JOURNEY BEYOND OUR WORLD</p><h1 id="hero-title">THE SOLAR<br><em>SYSTEM</em></h1><p class="hero__subtitle">Eight worlds. One star.<br>A universe of stories in between.</p></div>
+      <div class="hero__topline"><span>EST. 4.6 BILLION YEARS AGO</span><span>01 STAR &nbsp;·&nbsp; ${majorLabel} PLANETS${dwarfLabel}</span></div>
+      <div class="hero__content"><p class="eyebrow hero__eyebrow">A JOURNEY BEYOND OUR WORLD</p><h1 id="hero-title">THE SOLAR<br><em>SYSTEM</em></h1><p class="hero__subtitle">Nine worlds. One star.<br>A universe of stories in between.</p></div>
       <div class="hero__bottom"><div class="scroll-hint"><span class="scroll-hint__line"></span><span>SCROLL TO EXPLORE</span></div><span>DRAG THROUGH SPACE BY SCROLLING</span><span class="hero__coordinate">SOL SYSTEM / MILKY WAY</span></div>
     </section>
     ${planets.map((p, index) => `
       <section class="chapter chapter--${p.id} ${index % 2 ? 'chapter--right' : 'chapter--left'}" id="${p.id}" aria-labelledby="heading-${p.id}" style="--accent:${p.accent}">
         <div class="chapter__content">
-          <div class="chapter__kicker"><span class="chapter__dash"></span><span>CHAPTER ${p.number} / 08</span><span class="chapter__category">${p.category}</span></div>
+          <div class="chapter__kicker"><span class="chapter__dash"></span><span>CHAPTER ${p.number} / ${chapterTotal}</span><span class="chapter__category">${p.category}</span></div>
           <h2 id="heading-${p.id}">${p.name.toUpperCase()}</h2>
           <p class="chapter__description">${p.description}</p>
           <dl class="facts">${fact('DISTANCE FROM SUN',p.distance)}${fact('DIAMETER',p.diameter)}${fact('LENGTH OF DAY',p.day)}${fact('LENGTH OF YEAR',p.year)}${fact('KNOWN MOONS',p.moons)}</dl>
           <div class="chapter__next">${index < planets.length-1 ? `NEXT WORLD <span>${planets[index+1].name.toUpperCase()}</span><b aria-hidden="true">↘</b>` : 'END OF THE PLANETARY JOURNEY'}</div>
         </div>
         <span class="chapter__watermark" aria-hidden="true">${p.number}</span>
-        ${index === planets.length-1 ? `<footer class="story-footer"><span>BEYOND NEPTUNE, THE JOURNEY CONTINUES.</span><a href="#hero">RETURN TO THE SUN ↑</a><a href="https://science.nasa.gov/solar-system/planet-sizes-and-locations-in-our-solar-system/" target="_blank" rel="noreferrer">PLANET FACTS: NASA ↗</a><a href="https://ssd.jpl.nasa.gov/sats/discovery.html" target="_blank" rel="noreferrer">MOON COUNTS: NASA/JPL ↗</a></footer>` : ''}
+        ${index === planets.length-1 ? `<footer class="story-footer"><span>BEYOND PLUTO, THE JOURNEY CONTINUES.</span><a href="#hero">RETURN TO THE SUN ↑</a><a href="https://science.nasa.gov/solar-system/planet-sizes-and-locations-in-our-solar-system/" target="_blank" rel="noreferrer">PLANET FACTS: NASA ↗</a><a href="https://ssd.jpl.nasa.gov/sats/discovery.html" target="_blank" rel="noreferrer">MOON COUNTS: NASA/JPL ↗</a></footer>` : ''}
       </section>`).join('')}
   </main>
   <div class="model-warning" id="model-warning" hidden></div>

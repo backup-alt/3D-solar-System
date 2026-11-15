@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { planets, type PlanetData, type PlanetId } from '../data/planets';
 import { loadModel, type ModelId } from './loaders';
+import { createProceduralPlanet } from './procedural';
 import { isMobile, isTablet } from '../utils/responsive';
 
 interface World {
@@ -103,6 +104,13 @@ export function updateOrbitLayout() {
 }
 
 export async function attachModel(id: ModelId) {
+  if (id === 'pluto') {
+    const world = worlds.get(id)!;
+    if (!world.modelGroup.children.length) {
+      world.modelGroup.add(createProceduralPlanet(id));
+    }
+    return;
+  }
   const model = await loadModel(id);
   optimizeMaterial(model);
   if (id === 'sun') {

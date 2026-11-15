@@ -3,13 +3,13 @@
 🌐 **Access the website here:**
 https://backup-alt.github.io/3D-solar-System/
 
-A cinematic journey through the Solar System, rendered in real time with original 3D planet models. Scroll through eight worlds, each with its own scale, orbit, rotation, and story.
+A cinematic journey through the Solar System, rendered in real time with original 3D planet models. Scroll through eight planets and a bonus dwarf planet, each with its own scale, orbit, rotation, and story.
 
 have fun! 🚀
 
 ---
 
-## The Eight Worlds
+## The Worlds
 
 | # | Planet | Type | Distance from Sun | Diameter | Day Length | Year Length | Moons |
 |---|--------|------|-------------------|----------|------------|-------------|-------|
@@ -21,6 +21,7 @@ have fun! 🚀
 | 06 | [Saturn](#saturn) | The Ringed Giant | 1.43 billion km | 120,536 km | 10.7 hours | 29.45 Earth years | 293 |
 | 07 | [Uranus](#uranus) | The Sideways Planet | 2.87 billion km | 51,118 km | 17.2 hours | 84 Earth years | 29 |
 | 08 | [Neptune](#neptune) | The Outer Edge | 4.5 billion km | 49,528 km | 16.1 hours | 164.8 Earth years | 16 |
+| 09 | [Pluto](#pluto) | The Dwarf Planet (bonus) | 5.9 billion km | 2,377 km | 6.4 Earth days | 248 Earth years | 5 |
 
 ---
 
@@ -96,12 +97,22 @@ have fun! 🚀
 - Year length: 164.8 Earth years
 - Known moons: 16
 
+### Pluto
+**The Dwarf Planet** — A frozen world of nitrogen ice at the edge of the Kuiper Belt, reclassified as a dwarf planet in 2006.
+
+- Distance from Sun: 5.9 billion km
+- Diameter: 2,377 km
+- Day length: 6.4 Earth days
+- Year length: 248 Earth years
+- Known moons: 5
+
 ---
 
 ## Features
 
 - Real-time 3D rendering with Three.js
 - Original GLB models for the Sun and all eight planets
+- Bonus Pluto chapter with a procedurally generated surface (no extra download)
 - Scroll-driven journey with per-planet chapters
 - Accurate relative planet sizes and compressed orbital distances for legibility
 - Responsive layout for desktop and mobile
