@@ -1,4 +1,4 @@
-# DARK_MATTER_TRACE_V6
+# DARK_MATTER_TRACE_V7
 name: Dark Matter Cloud Agent
 
 on:
@@ -45,6 +45,7 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  checks: write
   id-token: write
 
 jobs:
@@ -174,9 +175,13 @@ jobs:
           git config user.email "$ACTOR_EMAIL"
 
       - name: Run OpenCode CLI
+        shell: bash
         env:
           OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DM_GITHUB_REPOSITORY: ${{ github.repository }}
+          DM_GITHUB_RUN_ID: ${{ github.run_id }}
+          DM_GITHUB_SHA: ${{ github.sha }}
           NO_COLOR: "1"
           OPENCODE_CONFIG: "/tmp/dark-matter-opencode.json"
           TASK_PROMPT: ${{ inputs.prompt }}
@@ -205,65 +210,39 @@ jobs:
             INSTRUCTIONS="$TASK_PROMPT"
           fi
 
-          SUPPORTS_FORMAT=0
-          if opencode run --help 2>&1 | grep -q -- '--format'; then
-            SUPPORTS_FORMAT=1
+          HELP_TEXT=$(opencode run --help 2>&1 || true)
+          OPENCODE_FLAGS=()
+          if printf '%s' "$HELP_TEXT" | grep -q -- '--format'; then
+            OPENCODE_FLAGS+=(--format json)
+          fi
+          if printf '%s' "$HELP_TEXT" | grep -q -- '--thinking'; then
+            OPENCODE_FLAGS+=(--thinking)
+          fi
+          if printf '%s' "$HELP_TEXT" | grep -q -- '--agent'; then
+            OPENCODE_FLAGS+=(--agent "$AGENT_MODE")
           fi
 
-          run_opencode() {
-            if [ $SUPPORTS_FORMAT -eq 1 ]; then
-              if opencode run --help 2>&1 | grep -q -- '--agent'; then
-                opencode run --format json -m "$MODEL" --agent "$AGENT_MODE" "$INSTRUCTIONS"
-              else
-                opencode run --format json -m "$MODEL" "$INSTRUCTIONS"
-              fi
-            else
-              if opencode run --help 2>&1 | grep -q -- '--agent'; then
-                opencode run -m "$MODEL" --agent "$AGENT_MODE" "$INSTRUCTIONS"
-              else
-                opencode run -m "$MODEL" "$INSTRUCTIONS"
-              fi
-            fi
-          }
-
-          set +e
-          run_opencode >"$RAW_JSON_FILE" 2>"$ERR_FILE"
-          STATUS=$?
-          set -e
-
-          if [ $STATUS -ne 0 ] || [ ! -s "$RAW_JSON_FILE" ]; then
-            if grep -qiE "Free usage limit|rate limit|401|unauthorized|quota" "$ERR_FILE" "$RAW_JSON_FILE" 2>/dev/null || [ -z "$OPENCODE_API_KEY" ]; then
-              echo "Retrying OpenCode CLI with public free tier..."
-              set +e
-              if [ $SUPPORTS_FORMAT -eq 1 ]; then
-                env -u OPENCODE_API_KEY bash -c '
-                  if opencode run --help 2>&1 | grep -q -- "--agent"; then
-                    opencode run --format json -m "$1" --agent "$2" "$3"
-                  else
-                    opencode run --format json -m "$1" "$3"
-                  fi
-                ' _ "$MODEL" "$AGENT_MODE" "$INSTRUCTIONS" >"$RAW_JSON_FILE" 2>"$ERR_FILE"
-              else
-                env -u OPENCODE_API_KEY bash -c '
-                  if opencode run --help 2>&1 | grep -q -- "--agent"; then
-                    opencode run -m "$1" --agent "$2" "$3"
-                  else
-                    opencode run -m "$1" "$3"
-                  fi
-                ' _ "$MODEL" "$AGENT_MODE" "$INSTRUCTIONS" >"$RAW_JSON_FILE" 2>"$ERR_FILE"
-              fi
-              STATUS=$?
-              set -e
-            fi
-          fi
-
-          cat << 'NODE_EOF' > /tmp/dm_extract.js
+          cat << 'NODE_EOF' > /tmp/dm_live.js
           const fs = require('fs');
-          const raw = fs.existsSync('/tmp/opencode_events.jsonl')
-            ? fs.readFileSync('/tmp/opencode_events.jsonl', 'utf8')
-            : '';
+          const https = require('https');
+          const readline = require('readline');
+
+          const rawFile = '/tmp/opencode_events.jsonl';
+          const outFile = '/tmp/opencode_reply.txt';
+          const traceFile = '/tmp/opencode_trace.b64';
+          const modelName = process.env.TASK_MODEL || 'opencode/big-pickle';
+          const agentMode = process.env.TASK_AGENT || 'build';
+          const ghToken = process.env.GH_TOKEN || '';
+          const ghRepo = process.env.DM_GITHUB_REPOSITORY || '';
+          const ghRunId = String(process.env.DM_GITHUB_RUN_ID || '');
+          const ghSha = process.env.DM_GITHUB_SHA || '';
+
+          try { fs.writeFileSync(rawFile, ''); } catch {}
+
           const thinkChunks = [];
-          const textChunks = [];
+          let roundTextBuffer = [];
+          const allTextChunks = [];
+          const nonJsonLines = [];
           const reads = new Set();
           const writes = new Set();
           const shell = new Set();
@@ -272,12 +251,48 @@ jobs:
           const skills = new Set();
           const steps = [];
           let parsedAnyJson = false;
+          let turnCount = 0;
+          let totalOutputTokens = 0;
+          let totalReasoningTokens = 0;
+          let lastFinishReason = '';
+          let liveStep = 'Invoking ' + modelName + ' (' + agentMode + ' mode)';
 
           function addStep(label) {
-            const clean = String(label || '').replace(/\s+/g, ' ').trim().slice(0, 110);
+            const clean = String(label || '').replace(/\s+/g, ' ').trim().slice(0, 120);
             if (!clean) return;
+            liveStep = clean;
             if (steps.length < 36 && steps[steps.length - 1] !== clean) {
               steps.push(clean);
+            }
+          }
+
+          function appendThinking(rawChunk, isDelta) {
+            const text = String(rawChunk || '');
+            if (!text.trim()) return;
+            if (isDelta && thinkChunks.length > 0) {
+              thinkChunks[thinkChunks.length - 1] += text;
+            } else {
+              const trimmed = text.trim();
+              const prev = thinkChunks.length > 0 ? thinkChunks[thinkChunks.length - 1].trim() : '';
+              if (prev && trimmed.startsWith(prev) && trimmed.length >= prev.length) {
+                thinkChunks[thinkChunks.length - 1] = trimmed;
+              } else if (prev !== trimmed) {
+                thinkChunks.push(trimmed);
+              }
+            }
+            const latestPreview = thinkChunks[thinkChunks.length - 1].trim().split(/\r?\n/).pop() || '';
+            if (latestPreview) {
+              liveStep = 'Thinking: ' + latestPreview.slice(0, 72);
+            }
+          }
+
+          function promoteRoundTextAsNarration() {
+            if (roundTextBuffer.length === 0) return;
+            const joined = roundTextBuffer.join(' ').replace(/\s+/g, ' ').trim();
+            roundTextBuffer = [];
+            if (joined) {
+              appendThinking(joined, false);
+              addStep('Planned: ' + joined.slice(0, 88));
             }
           }
 
@@ -300,30 +315,48 @@ jobs:
             }
           }
 
-          function recordTool(nameRaw, inputObj) {
+          function recordTool(nameRaw, inputObj, stateObj) {
+            promoteRoundTextAsNarration();
             const name = String(nameRaw || '').toLowerCase();
             const inp = inputObj && typeof inputObj === 'object' ? inputObj : {};
-            const path = inp.filePath || inp.path || inp.file || inp.target || '';
+            const st = stateObj && typeof stateObj === 'object' ? stateObj : {};
+            const title = typeof st.title === 'string' ? st.title.trim() : '';
+            const path = inp.filePath || inp.file_path || inp.path || inp.file || inp.target || inp.filename || inp.dir || inp.directory || '';
+
             if (name.includes('webfetch') || name.includes('websearch') || name.includes('web_search') || name.includes('search_web') || name === 'fetch') {
-              const target = inp.url || inp.query || inp.q || inp.prompt || path || '';
+              const target = inp.url || inp.query || inp.q || inp.prompt || path || title || '';
               if (target) {
                 const cleanTarget = String(target).slice(0, 100);
                 searches.add('web: ' + cleanTarget);
                 addStep('Searched web: ' + cleanTarget.slice(0, 72));
               }
-            } else if (name.includes('read') || name === 'view_file' || name === 'cat') {
-              if (path) {
-                reads.add(String(path));
-                addStep('Read ' + shortPath(path));
-                addSkillIfSkillPath(path);
+            } else if (name === 'read' || name.includes('read_file') || name.includes('read_repo') || name === 'view_file' || name === 'cat') {
+              const target = path || title;
+              if (target) {
+                reads.add(String(target));
+                addStep('Read ' + shortPath(target));
+                addSkillIfSkillPath(target);
               }
-            } else if (name.includes('write') || name.includes('edit') || name.includes('patch') || name.includes('replace')) {
-              if (path) {
-                writes.add(String(path));
-                addStep('Edited ' + shortPath(path));
+            } else if (name.includes('write') && !name.includes('todo')) {
+              const target = path || title;
+              if (target) {
+                writes.add(String(target));
+                addStep('Edited ' + shortPath(target));
+              }
+            } else if (name.includes('edit') || name.includes('patch') || name.includes('replace')) {
+              const target = path || title;
+              if (target) {
+                writes.add(String(target));
+                addStep('Edited ' + shortPath(target));
+              }
+            } else if (name.includes('delete') || name.includes('remove') || name.includes('unlink')) {
+              const target = path || title;
+              if (target) {
+                writes.add(String(target));
+                addStep('Deleted ' + shortPath(target));
               }
             } else if (name.includes('bash') || name.includes('shell') || name.includes('exec') || name.includes('command')) {
-              const cmd = inp.command || inp.cmd || inp.script || '';
+              const cmd = inp.command || inp.cmd || inp.script || title || '';
               if (cmd) {
                 const line = String(cmd).split('\n')[0].slice(0, 120);
                 shell.add(line);
@@ -333,75 +366,264 @@ jobs:
                   searches.add('web: ' + wq);
                   addStep('Searched web: ' + wq.slice(0, 72));
                 } else {
-                  addStep('Executed shell: ' + line.slice(0, 72));
+                  addStep('Executed shell: ' + (title || line).slice(0, 72));
                 }
               }
-            } else if (name.includes('grep') || name.includes('glob') || name.includes('find') || name.includes('list')) {
-              const q = inp.pattern || inp.query || inp.glob || inp.path || '';
+            } else if (name.includes('grep') || name.includes('glob') || name.includes('find') || name.includes('list') || name === 'codesearch' || name === 'ls') {
+              const q = inp.pattern || inp.query || inp.glob || inp.path || inp.filePath || inp.file_path || title || '';
               if (q) {
                 searches.add(name + ': ' + String(q).slice(0, 80));
                 addStep('Searched ' + name + ': ' + String(q).slice(0, 64));
               }
             } else if (name.includes('task') || name.includes('subagent') || name === 'agent') {
-              const st = inp.subagent_type || inp.agent || 'subagent';
+              const stType = inp.subagent_type || inp.agent || 'subagent';
               const desc = inp.description ? (': ' + String(inp.description).slice(0, 60)) : '';
-              subagents.add(String(st) + desc);
-              addStep('Launched sub-agent: ' + String(st) + desc);
+              subagents.add(String(stType) + desc);
+              addStep('Launched sub-agent: ' + String(stType) + desc);
             } else if (name.includes('skill')) {
-              const sname = inp.name || inp.skill || inp.path || 'skill';
+              const sname = inp.name || inp.skill || inp.path || title || 'skill';
               skills.add(String(sname));
               addStep('Loaded skill: ' + String(sname));
+            } else if (name.includes('todo')) {
+              const count = Array.isArray(inp.todos) ? inp.todos.length : 0;
+              addStep(title || (count > 0 ? 'Updated task checklist (' + count + ' items)' : 'Updated task checklist'));
+            } else if (name.includes('question')) {
+              addStep('Prepared clarifying question');
+            } else if (title || name) {
+              addStep(title || ('Ran tool: ' + name));
             }
           }
 
-          for (const line of raw.split(/\r?\n/)) {
+          function collectParts(evt) {
+            const out = [];
+            if (evt.part && typeof evt.part === 'object') out.push(evt.part);
+            if (evt.properties && evt.properties.part && typeof evt.properties.part === 'object') out.push(evt.properties.part);
+            if (Array.isArray(evt.parts)) evt.parts.forEach((x) => { if (x && typeof x === 'object') out.push(x); });
+            if (evt.message && Array.isArray(evt.message.parts)) evt.message.parts.forEach((x) => { if (x && typeof x === 'object') out.push(x); });
+            if (evt.item && typeof evt.item === 'object') out.push(evt.item);
+            if (out.length === 0) out.push(evt);
+            return out;
+          }
+
+          function buildTraceObject() {
+            return {
+              thinking: thinkChunks.join('\n\n').slice(0, 3200),
+              reads: Array.from(reads).slice(0, 24),
+              writes: Array.from(writes).slice(0, 24),
+              shell: Array.from(shell).slice(0, 20),
+              searches: Array.from(searches).slice(0, 20),
+              subagents: Array.from(subagents).slice(0, 12),
+              skills: Array.from(skills).slice(0, 12),
+              steps: steps.slice(0, 36),
+              liveStep: liveStep,
+            };
+          }
+
+          let checkRunId = null;
+          let checkDisabled = !ghToken || !ghRepo || !ghSha || !ghRunId;
+          let lastPatchMs = 0;
+          let patchTimer = null;
+          let inflightPromise = Promise.resolve();
+
+          function ghRequest(method, apiPath, bodyObj) {
+            if (checkDisabled) return Promise.resolve(null);
+            return new Promise((resolve) => {
+              const data = bodyObj ? JSON.stringify(bodyObj) : '';
+              const req = https.request({
+                hostname: 'api.github.com',
+                path: apiPath,
+                method: method,
+                timeout: 5000,
+                headers: {
+                  'Authorization': 'Bearer ' + ghToken,
+                  'Accept': 'application/vnd.github+json',
+                  'User-Agent': 'DarkMatter-CloudRunner/1.0',
+                  'X-GitHub-Api-Version': '2022-11-28',
+                  'Content-Type': 'application/json',
+                  'Content-Length': Buffer.byteLength(data)
+                }
+              }, (res) => {
+                let raw = '';
+                res.on('data', (c) => { if (raw.length < 32768) raw += c; });
+                res.on('end', () => {
+                  if (res.statusCode === 403 || res.statusCode === 404) {
+                    checkDisabled = true;
+                    resolve(null);
+                    return;
+                  }
+                  try { resolve(res.statusCode >= 200 && res.statusCode < 300 ? JSON.parse(raw || '{}') : null); }
+                  catch { resolve(null); }
+                });
+              });
+              req.on('error', () => resolve(null));
+              req.on('timeout', () => { req.destroy(); resolve(null); });
+              if (data) req.write(data);
+              req.end();
+            });
+          }
+
+          async function pushCheckRunUpdate(isFinal) {
+            if (checkDisabled) return;
+            const payloadObj = buildTraceObject();
+            const b64 = Buffer.from(JSON.stringify(payloadObj), 'utf8').toString('base64');
+            const outputBody = {
+              title: 'Dark Matter Trace',
+              summary: liveStep.slice(0, 140),
+              text: '<<<DARK_MATTER_LIVE_TRACE>>>' + b64 + '<<<DARK_MATTER_LIVE_TRACE_END>>>'
+            };
+            if (!checkRunId) {
+              const created = await ghRequest('POST', '/repos/' + ghRepo + '/check-runs', {
+                name: 'dark-matter-trace',
+                head_sha: ghSha,
+                external_id: ghRunId,
+                status: isFinal ? 'completed' : 'in_progress',
+                conclusion: isFinal ? 'neutral' : undefined,
+                output: outputBody
+              });
+              if (created && created.id) checkRunId = created.id;
+            } else {
+              const patchBody = isFinal
+                ? { status: 'completed', conclusion: 'neutral', output: outputBody }
+                : { output: outputBody };
+              await ghRequest('PATCH', '/repos/' + ghRepo + '/check-runs/' + checkRunId, patchBody);
+            }
+          }
+
+          function scheduleLiveUpdate() {
+            if (checkDisabled || patchTimer) return;
+            const now = Date.now();
+            const waitMs = Math.max(0, 1800 - (now - lastPatchMs));
+            patchTimer = setTimeout(() => {
+              patchTimer = null;
+              lastPatchMs = Date.now();
+              inflightPromise = inflightPromise.then(() => pushCheckRunUpdate(false));
+            }, waitMs);
+          }
+
+          if (!checkDisabled) {
+            inflightPromise = inflightPromise.then(() => pushCheckRunUpdate(false));
+          }
+
+          const rl = readline.createInterface({ input: process.stdin, crlfDelay: Infinity });
+          rl.on('line', (line) => {
+            try { fs.appendFileSync(rawFile, line + '\n'); } catch {}
             const t = line.trim();
-            if (!t || !t.startsWith('{')) continue;
-            let evt;
-            try { evt = JSON.parse(t); } catch { continue; }
-            parsedAnyJson = true;
-            const p = evt.part && typeof evt.part === 'object' ? evt.part : evt;
-            const typ = String(evt.type || p.type || '').toLowerCase();
-            if (typ.includes('reason') || typ.includes('think')) {
-              const r = p.text || p.thinking || evt.text || evt.thinking || '';
-              if (String(r).trim()) {
-                thinkChunks.push(String(r).trim());
-                addStep('Reasoning about task & codebase');
-              }
-            } else if (typ === 'text' || typ === 'assistant' || (p.type === 'text' && p.text)) {
-              const txt = p.text || evt.text || evt.content || '';
-              if (String(txt).trim()) textChunks.push(String(txt));
-            } else if (typ.includes('tool')) {
-              const toolName = p.tool || p.name || evt.tool || evt.name || '';
-              const st = p.state && typeof p.state === 'object' ? p.state : evt.state || {};
-              const inp = st.input || p.input || p.args || evt.input || {};
-              recordTool(toolName, inp);
+            if (!t) return;
+            if (!t.startsWith('{')) {
+              nonJsonLines.push(line);
+              return;
             }
+            let evt;
+            try { evt = JSON.parse(t); } catch { nonJsonLines.push(line); return; }
+            parsedAnyJson = true;
+            const delta = (evt.properties && typeof evt.properties.delta === 'string') ? evt.properties.delta : (typeof evt.delta === 'string' ? evt.delta : '');
+            for (const p of collectParts(evt)) {
+              const typ = String(p.type || evt.type || '').toLowerCase();
+              if (typeof p.reasoning_content === 'string') appendThinking(p.reasoning_content, false);
+              if (typeof p.reasoning === 'string') appendThinking(p.reasoning, false);
+              if (typeof p.thinking === 'string') appendThinking(p.thinking, false);
+              if (typeof evt.reasoning_content === 'string') appendThinking(evt.reasoning_content, false);
+              if (typeof evt.reasoning === 'string') appendThinking(evt.reasoning, false);
+
+              if (typ.includes('reason') || typ.includes('think')) {
+                const r = delta || p.text || p.thinking || p.reasoning || evt.text || evt.thinking || '';
+                if (typeof r === 'string' && r.trim()) {
+                  appendThinking(r, Boolean(delta));
+                }
+              } else if (typ === 'step_start' || typ === 'step-start') {
+                turnCount++;
+                promoteRoundTextAsNarration();
+                if (turnCount === 1 && steps.length === 0) {
+                  addStep('Model ' + modelName + ' analyzing request');
+                } else if (turnCount > 1) {
+                  liveStep = 'Processing step ' + turnCount + '…';
+                }
+              } else if (typ === 'step_finish' || typ === 'step-finish') {
+                const tokens = p.tokens || evt.tokens || {};
+                const outTok = Number(tokens.output || 0);
+                const reasonTok = Number(tokens.reasoning || 0);
+                if (outTok > 0) totalOutputTokens += outTok;
+                if (reasonTok > 0) totalReasoningTokens += reasonTok;
+                const reason = String(p.reason || evt.reason || '').trim();
+                if (reason) lastFinishReason = reason;
+              } else if (typ === 'error') {
+                const errObj = p.error || evt.error || p;
+                const msg = typeof errObj === 'string' ? errObj : (errObj.message || JSON.stringify(errObj));
+                if (msg) addStep('Error: ' + String(msg).slice(0, 90));
+              } else if (typ.includes('tool') || p.tool || evt.tool) {
+                const toolName = p.tool || p.name || p.toolName || evt.tool || evt.name || '';
+                const st = p.state && typeof p.state === 'object' ? p.state : evt.state || {};
+                const inp = st.input || p.input || p.args || p.arguments || evt.input || {};
+                recordTool(toolName, inp, st);
+              } else if (typ === 'text' || typ === 'assistant' || (p.type === 'text' && typeof p.text === 'string')) {
+                const txt = delta || p.text || evt.text || evt.content || '';
+                if (typeof txt === 'string' && txt.trim()) {
+                  roundTextBuffer.push(txt);
+                  allTextChunks.push(txt);
+                }
+              }
+            }
+            scheduleLiveUpdate();
+          });
+
+          rl.on('close', async () => {
+            if (patchTimer) {
+              clearTimeout(patchTimer);
+              patchTimer = null;
+            }
+            let finalText = parsedAnyJson
+              ? (roundTextBuffer.length > 0 ? roundTextBuffer : allTextChunks).join('\n').trim()
+              : nonJsonLines.join('\n').trim();
+            finalText = finalText.replace(/<(?:think|thinking|thought)>([\s\S]*?)<\/(?:think|thinking|thought)>/gi, (_, inner) => {
+              if (inner && inner.trim()) {
+                appendThinking(inner.trim(), false);
+              }
+              return '';
+            }).trim();
+
+            if (thinkChunks.length === 0 && reads.size === 0 && writes.size === 0 && shell.size === 0 && searches.size === 0) {
+              addStep('Ran ' + modelName + ' (' + agentMode + ' mode) — direct reply, no repo tools needed');
+            }
+            if (totalOutputTokens > 0 || totalReasoningTokens > 0) {
+              const tokParts = [];
+              if (totalReasoningTokens > 0) tokParts.push(totalReasoningTokens + ' reasoning');
+              if (totalOutputTokens > 0) tokParts.push(totalOutputTokens + ' output');
+              const finSuffix = lastFinishReason ? (lastFinishReason + ' · ') : '';
+              addStep('Model finished (' + finSuffix + tokParts.join(', ') + ' tokens)');
+            } else if (lastFinishReason) {
+              addStep('Model finished (' + lastFinishReason + ')');
+            }
+
+            fs.writeFileSync(outFile, finalText);
+            const finalTrace = buildTraceObject();
+            fs.writeFileSync(traceFile, Buffer.from(JSON.stringify(finalTrace), 'utf8').toString('base64'));
+            await inflightPromise;
+            await pushCheckRunUpdate(true);
+          });
+          NODE_EOF
+
+          run_opencode() {
+            opencode run "${OPENCODE_FLAGS[@]}" -m "$MODEL" "$INSTRUCTIONS"
           }
 
-          let finalText = parsedAnyJson ? textChunks.join('\n').trim() : raw.trim();
-          finalText = finalText.replace(/<think>([\s\S]*?)<\/think>/gi, (_, inner) => {
-            if (inner && inner.trim()) {
-              thinkChunks.push(inner.trim());
-              addStep('Reasoning about task & codebase');
-            }
-            return '';
-          }).trim();
+          set +e
+          run_opencode 2>"$ERR_FILE" | node /tmp/dm_live.js
+          STATUS=${PIPESTATUS[0]}
+          set -e
 
-          fs.writeFileSync('/tmp/opencode_reply.txt', finalText);
-          const trace = {
-            thinking: thinkChunks.join('\n\n').slice(0, 3200),
-            reads: Array.from(reads).slice(0, 24),
-            writes: Array.from(writes).slice(0, 24),
-            shell: Array.from(shell).slice(0, 20),
-            searches: Array.from(searches).slice(0, 20),
-            subagents: Array.from(subagents).slice(0, 12),
-            skills: Array.from(skills).slice(0, 12),
-            steps: steps.slice(0, 36),
-          };
-          fs.writeFileSync('/tmp/opencode_trace.b64', Buffer.from(JSON.stringify(trace), 'utf8').toString('base64'));
-          NODE_EOF
-          node /tmp/dm_extract.js || cp "$RAW_JSON_FILE" "$OUT_FILE"
+          if [ $STATUS -ne 0 ] || [ ! -s "$RAW_JSON_FILE" ]; then
+            if grep -qiE "Free usage limit|rate limit|401|unauthorized|quota" "$ERR_FILE" "$RAW_JSON_FILE" 2>/dev/null || [ -z "$OPENCODE_API_KEY" ]; then
+              echo "Retrying OpenCode CLI with public free tier..."
+              set +e
+              env -u OPENCODE_API_KEY opencode run "${OPENCODE_FLAGS[@]}" -m "$MODEL" "$INSTRUCTIONS" 2>"$ERR_FILE" | node /tmp/dm_live.js
+              STATUS=${PIPESTATUS[0]}
+              set -e
+            fi
+          fi
+
+          if [ ! -s "$OUT_FILE" ] && [ -s "$RAW_JSON_FILE" ]; then
+            cp "$RAW_JSON_FILE" "$OUT_FILE"
+          fi
 
           PR_URL=""
           PR_ERROR=""
