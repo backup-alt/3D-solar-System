@@ -1,0 +1,549 @@
+# DARK_MATTER_TRACE_V5
+name: Dark Matter Cloud Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      prompt:
+        description: 'Task instructions from Dark Matter mobile'
+        required: true
+        type: string
+      model:
+        description: 'OpenCode model ID (e.g. opencode/big-pickle)'
+        required: false
+        default: 'opencode/big-pickle'
+        type: string
+      agent:
+        description: 'Agent profile (build or plan)'
+        required: false
+        default: 'build'
+        type: string
+      thread_id:
+        description: 'Dark Matter thread ID'
+        required: false
+        default: ''
+        type: string
+      target_branch:
+        description: 'Branch selected by user to inspect or push commits'
+        required: false
+        default: ''
+        type: string
+      branch_strategy:
+        description: 'direct or new_pr_branch'
+        required: false
+        default: 'direct'
+        type: string
+      keep_alive_minutes:
+        description: 'Runner timeout/keep-alive window in minutes (360 for public, 40 for private)'
+        required: false
+        default: '360'
+        type: string
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  opencode-mobile:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJSON(inputs.keep_alive_minutes || '360') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.target_branch || github.ref_name }}
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Cache OpenCode CLI
+        id: cache-opencode
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.opencode-cli
+            ~/.local/share/opencode
+            ~/.cache/opencode
+          key: ${{ runner.os }}-opencode-cli-v2
+          restore-keys: |
+            ${{ runner.os }}-opencode-cli-
+
+      - name: Prepare OpenCode CLI
+        run: |
+          mkdir -p "$HOME/.opencode-cli/node_modules/.bin"
+          if [ ! -x "$HOME/.opencode-cli/node_modules/.bin/opencode" ]; then
+            npm install --prefix "$HOME/.opencode-cli" --no-save --silent opencode-ai@latest
+          fi
+          cat << 'WEBSEARCH_EOF' > "$HOME/.opencode-cli/node_modules/.bin/dm-websearch"
+          #!/usr/bin/env node
+          const https = require('https');
+          const q = process.argv.slice(2).join(' ').trim();
+          if (!q) {
+            console.log('Usage: dm-websearch "<search query or https://url>"');
+            process.exit(0);
+          }
+          function get(url, headers = {}) {
+            return new Promise((resolve) => {
+              const req = https.get(url, {
+                headers: Object.assign({
+                  'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36',
+                  'Accept': 'text/html,application/json;q=0.9,*/*;q=0.8'
+                }, headers),
+                timeout: 8000
+              }, (res) => {
+                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+                  const next = res.headers.location.startsWith('http')
+                    ? res.headers.location
+                    : new URL(res.headers.location, url).toString();
+                  resolve(get(next, headers));
+                  return;
+                }
+                let data = '';
+                res.on('data', (c) => { if (data.length < 220000) data += c; });
+                res.on('end', () => resolve(data));
+              });
+              req.on('error', () => resolve(''));
+              req.on('timeout', () => { req.destroy(); resolve(''); });
+            });
+          }
+          function stripHtml(html) {
+            return String(html || '')
+              .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+              .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+              .replace(/<[^>]+>/g, ' ')
+              .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#x27;/g, "'").replace(/&nbsp;/g, ' ')
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+          (async () => {
+            if (/^https?:\/\//i.test(q)) {
+              const raw = await get(q);
+              console.log('URL: ' + q + '\n\n' + stripHtml(raw).slice(0, 7000));
+              return;
+            }
+            const ddgUrl = 'https://html.duckduckgo.com/html/?q=' + encodeURIComponent(q);
+            const html = await get(ddgUrl);
+            const results = [];
+            const re = /<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>[\s\S]*?(?:<a[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/a>|<div[^>]+class="[^"]*result__snippet[^"]*"[^>]*>([\s\S]*?)<\/div>)/gi;
+            let m;
+            while ((m = re.exec(html)) && results.length < 6) {
+              let link = m[1] || '';
+              const uddg = link.match(/[?&]uddg=([^&]+)/);
+              if (uddg) link = decodeURIComponent(uddg[1]);
+              const title = stripHtml(m[2]);
+              const snippet = stripHtml(m[3] || m[4] || '');
+              if (title && link) results.push({ title, url: link, snippet });
+            }
+            if (results.length === 0) {
+              const wikiUrl = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=' + encodeURIComponent(q) + '&utf8=&format=json&srlimit=5';
+              const wikiRaw = await get(wikiUrl);
+              try {
+                const j = JSON.parse(wikiRaw);
+                for (const item of (j.query && j.query.search) || []) {
+                  results.push({
+                    title: item.title,
+                    url: 'https://en.wikipedia.org/wiki/' + encodeURIComponent(item.title.replace(/ /g, '_')),
+                    snippet: stripHtml(item.snippet || '')
+                  });
+                }
+              } catch {}
+            }
+            if (results.length === 0) {
+              console.log('No direct web matches found for: ' + q);
+            } else {
+              results.forEach((r, i) => {
+                console.log((i + 1) + '. ' + r.title + '\n   URL: ' + r.url + '\n   ' + r.snippet + '\n');
+              });
+            }
+          })();
+          WEBSEARCH_EOF
+          chmod +x "$HOME/.opencode-cli/node_modules/.bin/dm-websearch"
+          echo "$HOME/.opencode-cli/node_modules/.bin" >> "$GITHUB_PATH"
+          git config user.name "Dark Matter Agent"
+          git config user.email "dark-matter-agent[bot]@users.noreply.github.com"
+
+      - name: Run OpenCode CLI
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NO_COLOR: "1"
+          OPENCODE_CONFIG: "/tmp/dark-matter-opencode.json"
+          TASK_PROMPT: ${{ inputs.prompt }}
+          TASK_MODEL: ${{ inputs.model || 'opencode/big-pickle' }}
+          TASK_AGENT: ${{ inputs.agent || 'build' }}
+          TASK_THREAD_ID: ${{ inputs.thread_id }}
+          TARGET_BRANCH: ${{ inputs.target_branch || github.ref_name }}
+          BRANCH_STRATEGY: ${{ inputs.branch_strategy || 'direct' }}
+          DEFAULT_BRANCH: ${{ github.ref_name }}
+        run: |
+          MODEL="${TASK_MODEL:-opencode/big-pickle}"
+          AGENT_MODE="${TASK_AGENT:-build}"
+          RAW_JSON_FILE="/tmp/opencode_events.jsonl"
+          OUT_FILE="/tmp/opencode_reply.txt"
+          ERR_FILE="/tmp/opencode_err.txt"
+          TRACE_B64_FILE="/tmp/opencode_trace.b64"
+
+          if [ "$AGENT_MODE" = "plan" ]; then
+            printf '{"permission":{"*":"deny","read":"allow","glob":"allow","grep":"allow","list":"allow","webfetch":"allow","websearch":"allow","fetch":"allow","search":"allow","bash":"allow"}}' > /tmp/dark-matter-opencode.json
+            export OPENCODE_PERMISSION='{"*":"deny","read":"allow","glob":"allow","grep":"allow","list":"allow","webfetch":"allow","websearch":"allow","fetch":"allow","search":"allow","bash":"allow"}'
+            INSTRUCTIONS="$TASK_PROMPT"
+          else
+            printf '{"permission":"allow"}' > /tmp/dark-matter-opencode.json
+            export OPENCODE_PERMISSION='{"*":"allow"}'
+            INSTRUCTIONS="$TASK_PROMPT"
+          fi
+
+          SUPPORTS_FORMAT=0
+          if opencode run --help 2>&1 | grep -q -- '--format'; then
+            SUPPORTS_FORMAT=1
+          fi
+
+          run_opencode() {
+            if [ $SUPPORTS_FORMAT -eq 1 ]; then
+              if opencode run --help 2>&1 | grep -q -- '--agent'; then
+                opencode run --format json -m "$MODEL" --agent "$AGENT_MODE" "$INSTRUCTIONS"
+              else
+                opencode run --format json -m "$MODEL" "$INSTRUCTIONS"
+              fi
+            else
+              if opencode run --help 2>&1 | grep -q -- '--agent'; then
+                opencode run -m "$MODEL" --agent "$AGENT_MODE" "$INSTRUCTIONS"
+              else
+                opencode run -m "$MODEL" "$INSTRUCTIONS"
+              fi
+            fi
+          }
+
+          set +e
+          run_opencode >"$RAW_JSON_FILE" 2>"$ERR_FILE"
+          STATUS=$?
+          set -e
+
+          if [ $STATUS -ne 0 ] || [ ! -s "$RAW_JSON_FILE" ]; then
+            if grep -qiE "Free usage limit|rate limit|401|unauthorized|quota" "$ERR_FILE" "$RAW_JSON_FILE" 2>/dev/null || [ -z "$OPENCODE_API_KEY" ]; then
+              echo "Retrying OpenCode CLI with public free tier..."
+              set +e
+              if [ $SUPPORTS_FORMAT -eq 1 ]; then
+                env -u OPENCODE_API_KEY bash -c '
+                  if opencode run --help 2>&1 | grep -q -- "--agent"; then
+                    opencode run --format json -m "$1" --agent "$2" "$3"
+                  else
+                    opencode run --format json -m "$1" "$3"
+                  fi
+                ' _ "$MODEL" "$AGENT_MODE" "$INSTRUCTIONS" >"$RAW_JSON_FILE" 2>"$ERR_FILE"
+              else
+                env -u OPENCODE_API_KEY bash -c '
+                  if opencode run --help 2>&1 | grep -q -- "--agent"; then
+                    opencode run -m "$1" --agent "$2" "$3"
+                  else
+                    opencode run -m "$1" "$3"
+                  fi
+                ' _ "$MODEL" "$AGENT_MODE" "$INSTRUCTIONS" >"$RAW_JSON_FILE" 2>"$ERR_FILE"
+              fi
+              STATUS=$?
+              set -e
+            fi
+          fi
+
+          cat << 'NODE_EOF' > /tmp/dm_extract.js
+          const fs = require('fs');
+          const raw = fs.existsSync('/tmp/opencode_events.jsonl')
+            ? fs.readFileSync('/tmp/opencode_events.jsonl', 'utf8')
+            : '';
+          const thinkChunks = [];
+          const textChunks = [];
+          const reads = new Set();
+          const writes = new Set();
+          const shell = new Set();
+          const searches = new Set();
+          const subagents = new Set();
+          const skills = new Set();
+          const steps = [];
+          let parsedAnyJson = false;
+
+          function addStep(label) {
+            const clean = String(label || '').replace(/\s+/g, ' ').trim().slice(0, 110);
+            if (!clean) return;
+            if (steps.length < 36 && steps[steps.length - 1] !== clean) {
+              steps.push(clean);
+            }
+          }
+
+          function shortPath(p) {
+            const parts = String(p || '').split('/').filter(Boolean);
+            return parts.length <= 2 ? String(p || '') : parts.slice(-2).join('/');
+          }
+
+          function addSkillIfSkillPath(p) {
+            if (!p) return;
+            const norm = String(p);
+            const m = norm.match(/(?:^|\/)([^\/]+)\/SKILL\.md$/i);
+            if (m && m[1]) {
+              skills.add(m[1]);
+              addStep('Loaded skill: ' + m[1]);
+            } else if (/\.opencode\/skills\/([^\/]+)/i.test(norm)) {
+              const sk = norm.match(/\.opencode\/skills\/([^\/]+)/i)[1];
+              skills.add(sk);
+              addStep('Loaded skill: ' + sk);
+            }
+          }
+
+          function recordTool(nameRaw, inputObj) {
+            const name = String(nameRaw || '').toLowerCase();
+            const inp = inputObj && typeof inputObj === 'object' ? inputObj : {};
+            const path = inp.filePath || inp.path || inp.file || inp.target || '';
+            if (name.includes('webfetch') || name.includes('websearch') || name.includes('web_search') || name.includes('search_web') || name === 'fetch') {
+              const target = inp.url || inp.query || inp.q || inp.prompt || path || '';
+              if (target) {
+                const cleanTarget = String(target).slice(0, 100);
+                searches.add('web: ' + cleanTarget);
+                addStep('Searched web: ' + cleanTarget.slice(0, 72));
+              }
+            } else if (name.includes('read') || name === 'view_file' || name === 'cat') {
+              if (path) {
+                reads.add(String(path));
+                addStep('Read ' + shortPath(path));
+                addSkillIfSkillPath(path);
+              }
+            } else if (name.includes('write') || name.includes('edit') || name.includes('patch') || name.includes('replace')) {
+              if (path) {
+                writes.add(String(path));
+                addStep('Edited ' + shortPath(path));
+              }
+            } else if (name.includes('bash') || name.includes('shell') || name.includes('exec') || name.includes('command')) {
+              const cmd = inp.command || inp.cmd || inp.script || '';
+              if (cmd) {
+                const line = String(cmd).split('\n')[0].slice(0, 120);
+                shell.add(line);
+                const dmMatch = line.match(/dm-websearch\s+["']?([^"'\n]+)["']?/i);
+                if (dmMatch && dmMatch[1]) {
+                  const wq = dmMatch[1].trim().slice(0, 90);
+                  searches.add('web: ' + wq);
+                  addStep('Searched web: ' + wq.slice(0, 72));
+                } else {
+                  addStep('Executed shell: ' + line.slice(0, 72));
+                }
+              }
+            } else if (name.includes('grep') || name.includes('glob') || name.includes('find') || name.includes('list')) {
+              const q = inp.pattern || inp.query || inp.glob || inp.path || '';
+              if (q) {
+                searches.add(name + ': ' + String(q).slice(0, 80));
+                addStep('Searched ' + name + ': ' + String(q).slice(0, 64));
+              }
+            } else if (name.includes('task') || name.includes('subagent') || name === 'agent') {
+              const st = inp.subagent_type || inp.agent || 'subagent';
+              const desc = inp.description ? (': ' + String(inp.description).slice(0, 60)) : '';
+              subagents.add(String(st) + desc);
+              addStep('Launched sub-agent: ' + String(st) + desc);
+            } else if (name.includes('skill')) {
+              const sname = inp.name || inp.skill || inp.path || 'skill';
+              skills.add(String(sname));
+              addStep('Loaded skill: ' + String(sname));
+            }
+          }
+
+          for (const line of raw.split(/\r?\n/)) {
+            const t = line.trim();
+            if (!t || !t.startsWith('{')) continue;
+            let evt;
+            try { evt = JSON.parse(t); } catch { continue; }
+            parsedAnyJson = true;
+            const p = evt.part && typeof evt.part === 'object' ? evt.part : evt;
+            const typ = String(evt.type || p.type || '').toLowerCase();
+            if (typ.includes('reason') || typ.includes('think')) {
+              const r = p.text || p.thinking || evt.text || evt.thinking || '';
+              if (String(r).trim()) {
+                thinkChunks.push(String(r).trim());
+                addStep('Reasoning about task & codebase');
+              }
+            } else if (typ === 'text' || typ === 'assistant' || (p.type === 'text' && p.text)) {
+              const txt = p.text || evt.text || evt.content || '';
+              if (String(txt).trim()) textChunks.push(String(txt));
+            } else if (typ.includes('tool')) {
+              const toolName = p.tool || p.name || evt.tool || evt.name || '';
+              const st = p.state && typeof p.state === 'object' ? p.state : evt.state || {};
+              const inp = st.input || p.input || p.args || evt.input || {};
+              recordTool(toolName, inp);
+            }
+          }
+
+          let finalText = parsedAnyJson ? textChunks.join('\n').trim() : raw.trim();
+          finalText = finalText.replace(/<think>([\s\S]*?)<\/think>/gi, (_, inner) => {
+            if (inner && inner.trim()) {
+              thinkChunks.push(inner.trim());
+              addStep('Reasoning about task & codebase');
+            }
+            return '';
+          }).trim();
+
+          fs.writeFileSync('/tmp/opencode_reply.txt', finalText);
+          const trace = {
+            thinking: thinkChunks.join('\n\n').slice(0, 3200),
+            reads: Array.from(reads).slice(0, 24),
+            writes: Array.from(writes).slice(0, 24),
+            shell: Array.from(shell).slice(0, 20),
+            searches: Array.from(searches).slice(0, 20),
+            subagents: Array.from(subagents).slice(0, 12),
+            skills: Array.from(skills).slice(0, 12),
+            steps: steps.slice(0, 36),
+          };
+          fs.writeFileSync('/tmp/opencode_trace.b64', Buffer.from(JSON.stringify(trace), 'utf8').toString('base64'));
+          NODE_EOF
+          node /tmp/dm_extract.js || cp "$RAW_JSON_FILE" "$OUT_FILE"
+
+          PR_URL=""
+          PR_ERROR=""
+          COMMIT_URL=""
+          BRANCH_NAME=""
+          CHANGED_FILES=""
+          FILE_STATS_B64=""
+          if [ "$AGENT_MODE" != "plan" ] && [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            CHANGED_FILES=$(git diff --cached --name-only | tr '\n' ',' | sed 's/,$//')
+            FILE_STATS_B64=$(node -e '
+              const { execFileSync } = require("child_process");
+              const statusOut = execFileSync("git", ["diff", "--cached", "--name-status"]).toString();
+              const numOut = execFileSync("git", ["diff", "--cached", "--numstat"]).toString();
+              const statusMap = {};
+              for (const l of statusOut.trim().split(/\r?\n/)) {
+                if (!l) continue;
+                const parts = l.split(/\t/);
+                if (parts.length >= 2) statusMap[parts[parts.length - 1]] = parts[0].slice(0, 1);
+              }
+              const stats = [];
+              let patchBudget = 11000;
+              for (const l of numOut.trim().split(/\r?\n/)) {
+                if (!l) continue;
+                const parts = l.split(/\t/);
+                if (parts.length < 3) continue;
+                const path = parts.slice(2).join("\t");
+                let patch = "";
+                if (patchBudget > 300) {
+                  try {
+                    const rawDiff = execFileSync("git", ["diff", "--cached", "-U2", "--no-color", "--", path], { maxBuffer: 512 * 1024 }).toString();
+                    const diffLines = rawDiff.split(/\r?\n/);
+                    const hunkStart = diffLines.findIndex(dl => dl.startsWith("@@"));
+                    const relevant = (hunkStart >= 0 ? diffLines.slice(hunkStart) : diffLines).slice(0, 38);
+                    let joined = relevant.join("\n").slice(0, Math.min(1150, patchBudget));
+                    if (diffLines.length - (hunkStart >= 0 ? hunkStart : 0) > 38) joined += "\n... (diff truncated)";
+                    patch = joined;
+                    patchBudget -= patch.length;
+                  } catch {}
+                }
+                stats.push({
+                  path,
+                  status: statusMap[path] || "M",
+                  additions: parseInt(parts[0], 10) || 0,
+                  deletions: parseInt(parts[1], 10) || 0,
+                  patch
+                });
+                if (stats.length >= 40) break;
+              }
+              process.stdout.write(Buffer.from(JSON.stringify(stats), "utf8").toString("base64"));
+            ' 2>/dev/null || true)
+
+            git commit -m "feat(dark-matter): ${TASK_THREAD_ID:-cloud-task}"
+            COMMIT_SHA=$(git rev-parse HEAD 2>/dev/null || true)
+            DEST_BRANCH="${TARGET_BRANCH:-${DEFAULT_BRANCH:-main}}"
+            if [ "$BRANCH_STRATEGY" = "new_pr_branch" ]; then
+              BRANCH_NAME="dark-matter/cloud-${GITHUB_RUN_ID}"
+              git checkout -b "$BRANCH_NAME"
+              if git push -u origin "$BRANCH_NAME" 2>/tmp/git_push_err.txt; then
+                if [ -n "$COMMIT_SHA" ]; then
+                  COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_SHA}"
+                fi
+                PR_OUT=$(gh pr create --base "$DEST_BRANCH" --head "$BRANCH_NAME" --title "Dark Matter: ${TASK_THREAD_ID:-Cloud Agent Update}" --body "Automated OpenCode cloud run #${GITHUB_RUN_ID} using model \`$MODEL\`. Changed files: ${CHANGED_FILES}" 2>&1 || true)
+                PR_URL=$(printf '%s\n' "$PR_OUT" | grep -E '^https://' | tail -n 1 || true)
+                if [ -z "$PR_URL" ]; then
+                  PR_ERROR=$(printf '%s' "$PR_OUT" | tr '\n' ' ' | head -c 220)
+                fi
+              else
+                PR_ERROR=$(cat /tmp/git_push_err.txt | tr '\n' ' ' | head -c 220)
+                BRANCH_NAME=""
+              fi
+            else
+              if git push origin HEAD:"refs/heads/$DEST_BRANCH" 2>/tmp/git_push_err.txt; then
+                BRANCH_NAME="$DEST_BRANCH"
+                if [ -n "$COMMIT_SHA" ]; then
+                  COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_SHA}"
+                fi
+              else
+                # Fallback only if target branch is protected from direct push
+                BRANCH_NAME="dark-matter/cloud-${GITHUB_RUN_ID}"
+                git checkout -b "$BRANCH_NAME"
+                if git push -u origin "$BRANCH_NAME" 2>>/tmp/git_push_err.txt; then
+                  if [ -n "$COMMIT_SHA" ]; then
+                    COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_SHA}"
+                  fi
+                  PR_OUT=$(gh pr create --base "$DEST_BRANCH" --head "$BRANCH_NAME" --title "Dark Matter: ${TASK_THREAD_ID:-Cloud Agent Update}" --body "Branch protection on \`$DEST_BRANCH\` required a PR. Run #${GITHUB_RUN_ID} using \`$MODEL\`." 2>&1 || true)
+                  PR_URL=$(printf '%s\n' "$PR_OUT" | grep -E '^https://' | tail -n 1 || true)
+                  PR_ERROR="Direct push to '$DEST_BRANCH' was blocked by branch protection; opened PR instead."
+                else
+                  PR_ERROR=$(cat /tmp/git_push_err.txt | tr '\n' ' ' | head -c 220)
+                  BRANCH_NAME=""
+                fi
+              fi
+            fi
+          fi
+
+          printf '\n%s\n' '<<<DARK_MATTER_REPLY_START>>>'
+          if [ -s "$OUT_FILE" ]; then
+            cat "$OUT_FILE"
+          elif [ -s "$ERR_FILE" ]; then
+            echo "OpenCode CLI failed (exit $STATUS):"
+            cat "$ERR_FILE"
+          else
+            echo "OpenCode CLI finished (exit $STATUS) with empty output."
+          fi
+          printf '\n%s\n' '<<<DARK_MATTER_REPLY_END>>>'
+          if [ -n "$BRANCH_NAME" ]; then
+            printf '<<<DARK_MATTER_BRANCH>>>%s<<<DARK_MATTER_BRANCH_END>>>\n' "$BRANCH_NAME"
+          fi
+          if [ -n "$CHANGED_FILES" ]; then
+            printf '<<<DARK_MATTER_FILES>>>%s<<<DARK_MATTER_FILES_END>>>\n' "$CHANGED_FILES"
+          fi
+          if [ -n "$FILE_STATS_B64" ]; then
+            printf '<<<DARK_MATTER_FILE_STATS>>>%s<<<DARK_MATTER_FILE_STATS_END>>>\n' "$FILE_STATS_B64"
+          fi
+          if [ -s "$TRACE_B64_FILE" ]; then
+            printf '<<<DARK_MATTER_TRACE>>>%s<<<DARK_MATTER_TRACE_END>>>\n' "$(cat "$TRACE_B64_FILE")"
+          fi
+          if [ -n "$COMMIT_URL" ]; then
+            printf '<<<DARK_MATTER_COMMIT_URL>>>%s<<<DARK_MATTER_COMMIT_URL_END>>>\n' "$COMMIT_URL"
+          fi
+          if [ -n "$PR_URL" ]; then
+            printf '<<<DARK_MATTER_PR_URL>>>%s<<<DARK_MATTER_PR_URL_END>>>\n' "$PR_URL"
+          fi
+          if [ -n "$PR_ERROR" ]; then
+            printf '<<<DARK_MATTER_PR_ERROR>>>%s<<<DARK_MATTER_PR_ERROR_END>>>\n' "$PR_ERROR"
+          fi
+
+          if [ $STATUS -ne 0 ] && [ ! -s "$OUT_FILE" ]; then
+            exit $STATUS
+          fi
+
+  opencode-comment:
+    if: >-
+      github.event_name == 'issue_comment' &&
+      (contains(github.event.comment.body, '/oc') ||
+       contains(github.event.comment.body, '/opencode'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: Run OpenCode PR Agent
+        uses: anomalyco/opencode/github@latest
+        env:
+          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          model: opencode/big-pickle
+          use_github_token: true
